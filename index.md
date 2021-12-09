@@ -14,7 +14,6 @@
 - 2020年10月30日 [Insight Spring Test事务自动回滚的实现](https://blog.csdn.net/tt50335971/article/details/109384564)
 - 2020年09月18日 [Insight Mybatis 日志打印](https://blog.csdn.net/tt50335971/article/details/108670592)
 - 2020年09月11日 [Insight Mybatis 内嵌resultMap工作原理](./notes/Insight Mybatis 内嵌resultMap工作原理.md)
-- 2020年05月09日 [Insight Spring 注入排序的集合](https://blog.csdn.net/tt50335971/article/details/106025391)
 - 2020年04月07日 [Insight mybatis 动态sql解析-part2](https://blog.csdn.net/tt50335971/article/details/105373886)
 - 2019年12月20日 [Insight HandlerInterceptor 与@ExceptionHandler 的执行顺序](https://blog.csdn.net/tt50335971/article/details/103483315)
 - 2019年08月16日 [Insight spring-boot web错误页跳转原理](https://blog.csdn.net/tt50335971/article/details/99685071)
@@ -46,7 +45,7 @@
 - 2021年10月19日 [笔记 又一次慢SQL导致的线上服务不可用](https://blog.csdn.net/tt50335971/article/details/120855446)
 - 2020年11月20日 [Insight Mybatis JdbcTemplate 混合事务控制的实现](https://blog.csdn.net/tt50335971/article/details/110097866)
 - 2020年08月11日 [Insight Spring 循环依赖及解决方案](https://blog.csdn.net/tt50335971/article/details/107943318)
-- 
+- 2020年05月09日 [Insight Spring 泛集合注入以及应用.md](./notes/Insight Spring 泛集合注入以及应用.md)
 
 
 
