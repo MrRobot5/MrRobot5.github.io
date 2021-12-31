@@ -26,6 +26,7 @@
 
 ### Notes
 
+- 2021年12月30日 [笔记 - Java 值传递以及相关的知识点](./notes/笔记 - Java 值传递以及相关的知识点.md)
 - 2021年11月30日 [分布式事务-XA模式与atomikos框架浅析](./notes/分布式事务-XA模式与atomikos框架浅析.md)
 - 2021年11月17日 [清单-mybatis 参数封装和处理相关方法](https://blog.csdn.net/tt50335971/article/details/121383749)
 - 2021年07月30日 [漫游 Redis SORTGET combination](https://blog.csdn.net/tt50335971/article/details/119253113)
