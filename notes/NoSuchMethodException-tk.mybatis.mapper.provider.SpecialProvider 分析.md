@@ -1,3 +1,5 @@
+# NoSuchMethodException-tk.mybatis.mapper.provider.SpecialProvider.<init> 分析
+
 ## 问题
 
         在使用 tk.mybatis组件的过程中，调用 insertList()，报错如题。
