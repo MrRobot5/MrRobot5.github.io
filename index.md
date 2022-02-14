@@ -44,10 +44,11 @@
 
 ### Case
 
+- 2022年02月14日 [Case - SpringBootTest 使用过程中遇到的冷门问题](./notes/Case - SpringBootTest 使用过程中遇到的冷门问题.md)
 - 2021年10月19日 [笔记 又一次慢SQL导致的线上服务不可用](https://blog.csdn.net/tt50335971/article/details/120855446)
 - 2020年11月20日 [Insight Mybatis JdbcTemplate 混合事务控制的实现](https://blog.csdn.net/tt50335971/article/details/110097866)
 - 2020年08月11日 [Insight Spring 循环依赖及解决方案](https://blog.csdn.net/tt50335971/article/details/107943318)
-- 2020年05月09日 [Insight Spring 泛集合注入以及应用.md](./notes/Insight Spring 泛集合注入以及应用.md)
+- 2020年05月09日 [Insight Spring 泛集合注入以及应用](./notes/Insight Spring 泛集合注入以及应用.md)
 
 
 
