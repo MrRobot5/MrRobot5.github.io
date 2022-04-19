@@ -1,6 +1,6 @@
-## Welcome to My Pages
+## Welcommmmme
 
-主要是记录技术学习笔记。
+主要是记录技术学习笔记。理论 + 应用 = 真正的技术。
 
 包括常用框架的实现原理Insight，新技术的笔记，开发遇到的问题反思等等。
 
@@ -9,7 +9,7 @@
 - 2021年12月06日 [Insight Mybatis 内嵌查询以及lazyLoader工作原理](./notes/Insight Mybatis 内嵌查询以及lazyLoader工作原理.md)
 - 2021年04月23日 [Insight Spring重复Bean 注册的过程](https://blog.csdn.net/tt50335971/article/details/116066188)
 - 2021年07月23日 [Insight springboot boot spring - EnableAutoConfiguration](https://blog.csdn.net/tt50335971/article/details/119040834)
-- 2021年07月01日 [Insight springboot 默认配置文件加载实现](https://blog.csdn.net/tt50335971/article/details/118383290)
+- 2021年07月01日 [Insight springboot 默认配置文件加载实现](./notes/Insight springboot 默认配置文件加载实现.md)
 - 2020年11月17日 [Insight Spring3 @RequestMapping 自定义Aspect不生效问题](https://blog.csdn.net/tt50335971/article/details/109739630)
 - 2020年10月30日 [Insight Spring Test事务自动回滚的实现](https://blog.csdn.net/tt50335971/article/details/109384564)
 - 2020年09月18日 [Insight Mybatis 日志打印](https://blog.csdn.net/tt50335971/article/details/108670592)
@@ -17,8 +17,8 @@
 - 2020年04月07日 [Insight mybatis 动态sql解析-part2](https://blog.csdn.net/tt50335971/article/details/105373886)
 - 2019年12月20日 [Insight HandlerInterceptor 与@ExceptionHandler 的执行顺序](https://blog.csdn.net/tt50335971/article/details/103483315)
 - 2019年08月16日 [Insight spring-boot web错误页跳转原理](https://blog.csdn.net/tt50335971/article/details/99685071)
-- 2019年08月08日 [问题分析NoSuchMethodException: tk.mybatis.mapper.provider.SpecialProvider.](https://blog.csdn.net/tt50335971/article/details/98853441)
--  2018年12月25日[Insight SpringBoot 自动配置DataSource](https://blog.csdn.net/tt50335971/article/details/85254730)
+- 2019年08月08日 [问题分析 NoSuchMethodException: tk.mybatis.mapper.provider.SpecialProvider](./notes/NoSuchMethodException-tk.mybatis.mapper.provider.SpecialProvider 分析.md)
+- 2018年12月25日[Insight SpringBoot 自动配置DataSource](https://blog.csdn.net/tt50335971/article/details/85254730)
 - 2017年12月14日 [Insight jquery ajax参数序列化](https://blog.csdn.net/tt50335971/article/details/78806833)
 - 2017年01月10日 [Insight Springmvc's validator谈谈程序可扩展实现策略](https://blog.csdn.net/tt50335971/article/details/54313058)
 
@@ -26,6 +26,7 @@
 
 ### Notes
 
+- 2022年01月26日 [Tips-Java CAS 使用实例分析](./notes/Tips-Java CAS 使用实例分析.md)
 - 2021年12月30日 [笔记 - Java 值传递以及相关的知识点](./notes/笔记 - Java 值传递以及相关的知识点.md)
 - 2021年11月30日 [分布式事务-XA模式与atomikos框架浅析](./notes/分布式事务-XA模式与atomikos框架浅析.md)
 - 2021年11月17日 [清单-mybatis 参数封装和处理相关方法](https://blog.csdn.net/tt50335971/article/details/121383749)
@@ -43,10 +44,11 @@
 
 ### Case
 
+- 2022年02月14日 [Case - SpringBootTest 使用过程中遇到的冷门问题](./notes/Case - SpringBootTest 使用过程中遇到的冷门问题.md)
 - 2021年10月19日 [笔记 又一次慢SQL导致的线上服务不可用](https://blog.csdn.net/tt50335971/article/details/120855446)
 - 2020年11月20日 [Insight Mybatis JdbcTemplate 混合事务控制的实现](https://blog.csdn.net/tt50335971/article/details/110097866)
 - 2020年08月11日 [Insight Spring 循环依赖及解决方案](https://blog.csdn.net/tt50335971/article/details/107943318)
-- 2020年05月09日 [Insight Spring 泛集合注入以及应用.md](./notes/Insight Spring 泛集合注入以及应用.md)
+- 2020年05月09日 [Insight Spring 泛集合注入以及应用](./notes/Insight Spring 泛集合注入以及应用.md)
 
 
 
