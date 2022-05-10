@@ -22,8 +22,6 @@
 - 2017年12月14日 [Insight jquery ajax参数序列化](https://blog.csdn.net/tt50335971/article/details/78806833)
 - 2017年01月10日 [Insight Springmvc's validator谈谈程序可扩展实现策略](https://blog.csdn.net/tt50335971/article/details/54313058)
 
-
-
 ### Notes
 
 - 2022年01月26日 [Tips-Java CAS 使用实例分析](./notes/Tips-Java CAS 使用实例分析.md)
@@ -44,13 +42,11 @@
 
 ### Case
 
-- 2022年02月14日 [Case - SpringBootTest 使用过程中遇到的冷门问题](./notes/Case - SpringBootTest 使用过程中遇到的冷门问题.md)
+- 2022年5月10日 [NoClassDefFoundError案例-static 代码块](./notes/NoClassDefFoundError案例-static 代码块.md)
+- 2022年5月10日 [NoClassDefFoundError 案例-Spring MVC 扫描Controller](./notes/NoClassDefFoundError 案例-Spring MVC 扫描Controller.md)
 - 2021年10月19日 [笔记 又一次慢SQL导致的线上服务不可用](https://blog.csdn.net/tt50335971/article/details/120855446)
 - 2020年11月20日 [Insight Mybatis JdbcTemplate 混合事务控制的实现](https://blog.csdn.net/tt50335971/article/details/110097866)
 - 2020年08月11日 [Insight Spring 循环依赖及解决方案](https://blog.csdn.net/tt50335971/article/details/107943318)
 - 2020年05月09日 [Insight Spring 泛集合注入以及应用](./notes/Insight Spring 泛集合注入以及应用.md)
 
-
-
 ### 其他
-
