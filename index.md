@@ -1,11 +1,12 @@
 ## Welcommmmme
 
-主要是记录技术学习笔记。理论 + 应用 = 真正的技术。
+记录技术学习笔记。理论 + 应用 = 真正的技术🎯。
 
 包括常用框架的实现原理Insight，新技术的笔记，开发遇到的问题反思等等。
 
 ### Insight
 
+- 2022年05月18日 [Insight SpringBoot MVC 静态资源配置](./notes/Insight SpringBoot MVC 静态资源配置.md)
 - 2021年12月06日 [Insight Mybatis 内嵌查询以及lazyLoader工作原理](./notes/Insight Mybatis 内嵌查询以及lazyLoader工作原理.md)
 - 2021年04月23日 [Insight Spring重复Bean 注册的过程](https://blog.csdn.net/tt50335971/article/details/116066188)
 - 2021年07月23日 [Insight springboot boot spring - EnableAutoConfiguration](https://blog.csdn.net/tt50335971/article/details/119040834)
@@ -16,7 +17,7 @@
 - 2020年09月11日 [Insight Mybatis 内嵌resultMap工作原理](./notes/Insight Mybatis 内嵌resultMap工作原理.md)
 - 2020年04月07日 [Insight mybatis 动态sql解析-part2](https://blog.csdn.net/tt50335971/article/details/105373886)
 - 2019年12月20日 [Insight HandlerInterceptor 与@ExceptionHandler 的执行顺序](https://blog.csdn.net/tt50335971/article/details/103483315)
-- 2019年08月16日 [Insight spring-boot web错误页跳转原理](https://blog.csdn.net/tt50335971/article/details/99685071)
+- 2019年08月16日 [Insight SpringBoot MVC 错误页面跳转原理](./notes/Insight SpringBoot MVC 错误页面跳转原理.md)
 - 2019年08月08日 [问题分析 NoSuchMethodException: tk.mybatis.mapper.provider.SpecialProvider](./notes/NoSuchMethodException-tk.mybatis.mapper.provider.SpecialProvider 分析.md)
 - 2018年12月25日[Insight SpringBoot 自动配置DataSource](https://blog.csdn.net/tt50335971/article/details/85254730)
 - 2017年12月14日 [Insight jquery ajax参数序列化](https://blog.csdn.net/tt50335971/article/details/78806833)
@@ -34,7 +35,6 @@
 - 2021年02月16日 [笔记 RabbitMQ Tutorials 场景学习](./notes/笔记 RabbitMQ Tutorials 场景学习.md)
 - 2020年09月10日 [snaker 使用指导和设计浅析](./notes/笔记 snaker 使用指导和设计浅析.md)
 - 2020年08月25日 [尝试 QUARKUS - elasticsearch-quickstart](https://blog.csdn.net/tt50335971/article/details/108224036)
-- 2020年07月27日 [Insight Spring中的算法-占位符查找](https://blog.csdn.net/tt50335971/article/details/107621789)
 - 2019年08月01日 [清单 mybatis周边组件](https://blog.csdn.net/tt50335971/article/details/98116573)
 - 2018年01月25日 [漫游 ZooKeeper nio通信过程](https://blog.csdn.net/tt50335971/article/details/79163372)
 - 2018年01月04日 [漫游 HttpURLConnection](https://blog.csdn.net/tt50335971/article/details/78975745)
@@ -54,7 +54,7 @@
 ### snippet
 
 - [代码片段收藏](./notes/代码片段收藏.md)
-
-
+- [snippets-单例写法](./notes/snippets-单例写法.md)
+- [snippet-Spring中的算法-占位符查找](./notes/Snippet-Spring中的算法-占位符查找.md)
 
 ### 其他
