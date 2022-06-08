@@ -24,13 +24,15 @@
 
 ### Notes
 
+- 2022年06月08日 [笔记 - 包装模式（Wrapper）案例](./notes/笔记 - 包装模式（Wrapper）案例.md)
 - 2022年01月26日 [Tips-Java CAS 使用实例分析](./notes/Tips-Java CAS 使用实例分析.md)
 - 2021年12月30日 [笔记 - Java 值传递以及相关的知识点](./notes/笔记 - Java 值传递以及相关的知识点.md)
 - 2021年11月30日 [分布式事务-XA模式与atomikos框架浅析](./notes/分布式事务-XA模式与atomikos框架浅析.md)
 - 2021年11月17日 [清单-mybatis 参数封装和处理相关方法](https://blog.csdn.net/tt50335971/article/details/121383749)
 - 2021年07月30日 [漫游 Redis SORTGET combination](https://blog.csdn.net/tt50335971/article/details/119253113)
 - 2021年06月11日 [okhttp read timed out 重试方案解疑](https://blog.csdn.net/tt50335971/article/details/117820909)
-- 2020年09月10日 [snaker 使用指导和设计浅析](https://blog.csdn.net/tt50335971/article/details/108523151)
+- 2021年02月16日 [笔记 RabbitMQ Tutorials 场景学习](./notes/笔记 RabbitMQ Tutorials 场景学习.md)
+- 2020年09月10日 [snaker 使用指导和设计浅析](./notes/笔记 snaker 使用指导和设计浅析.md)
 - 2020年08月25日 [尝试 QUARKUS - elasticsearch-quickstart](https://blog.csdn.net/tt50335971/article/details/108224036)
 - 2020年07月27日 [Insight Spring中的算法-占位符查找](https://blog.csdn.net/tt50335971/article/details/107621789)
 - 2019年08月01日 [清单 mybatis周边组件](https://blog.csdn.net/tt50335971/article/details/98116573)
@@ -48,5 +50,11 @@
 - 2020年11月20日 [Insight Mybatis JdbcTemplate 混合事务控制的实现](https://blog.csdn.net/tt50335971/article/details/110097866)
 - 2020年08月11日 [Insight Spring 循环依赖及解决方案](https://blog.csdn.net/tt50335971/article/details/107943318)
 - 2020年05月09日 [Insight Spring 泛集合注入以及应用](./notes/Insight Spring 泛集合注入以及应用.md)
+
+### snippet
+
+- [代码片段收藏](./notes/代码片段收藏.md)
+
+
 
 ### 其他
