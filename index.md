@@ -25,6 +25,7 @@
 
 ### Notes
 
+- 2022年06月10日 [笔记 - Mysql Transaction Isolation Levels 案例](./notes/笔记 - Mysql Transaction Isolation Levels 案例.md)
 - 2022年06月08日 [笔记 - 包装模式（Wrapper）案例](./notes/笔记 - 包装模式（Wrapper）案例.md)
 - 2022年01月26日 [Tips-Java CAS 使用实例分析](./notes/Tips-Java CAS 使用实例分析.md)
 - 2021年12月30日 [笔记 - Java 值传递以及相关的知识点](./notes/笔记 - Java 值传递以及相关的知识点.md)
@@ -44,8 +45,9 @@
 
 ### Case
 
-- 2022年5月10日 [NoClassDefFoundError案例-static 代码块](./notes/NoClassDefFoundError案例-static 代码块.md)
-- 2022年5月10日 [NoClassDefFoundError 案例-Spring MVC 扫描Controller](./notes/NoClassDefFoundError 案例-Spring MVC 扫描Controller.md)
+- 2022年06月10日 [Case - Mysql TRANSACTION DEADLOCK](./notes/Case - Mysql TRANSACTION DEADLOCK.md)
+- 2022年05月10日 [NoClassDefFoundError案例-static 代码块](./notes/NoClassDefFoundError案例-static 代码块.md)
+- 2022年05月10日 [NoClassDefFoundError 案例-Spring MVC 扫描Controller](./notes/NoClassDefFoundError 案例-Spring MVC 扫描Controller.md)
 - 2021年10月19日 [笔记 又一次慢SQL导致的线上服务不可用](https://blog.csdn.net/tt50335971/article/details/120855446)
 - 2020年11月20日 [Insight Mybatis JdbcTemplate 混合事务控制的实现](https://blog.csdn.net/tt50335971/article/details/110097866)
 - 2020年08月11日 [Insight Spring 循环依赖及解决方案](https://blog.csdn.net/tt50335971/article/details/107943318)
