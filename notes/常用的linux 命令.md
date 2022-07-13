@@ -70,6 +70,12 @@ jar tvf build/libs/gs-gradle-0.1.0.jar
 
 # 反编译字节码
 javap -verbose -p Main.class
+
+
+# 查看到堆内对象示例的统计信息
+jmap -histo:live pid | head -n 10
+
+mvn clean package -DskipTests
 ```
 
 ## ffmpeg

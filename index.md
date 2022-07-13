@@ -45,6 +45,7 @@
 
 ### Case
 
+- 2022年07月13日 [SpringBoot Test bean 使用 NPE 诡异问题](./notes/SpringBoot Test bean 使用 NPE 诡异问题.md)
 - 2022年06月10日 [Case - Mysql TRANSACTION DEADLOCK](./notes/Case - Mysql TRANSACTION DEADLOCK.md)
 - 2022年05月10日 [NoClassDefFoundError案例-static 代码块](./notes/NoClassDefFoundError案例-static 代码块.md)
 - 2022年05月10日 [NoClassDefFoundError 案例-Spring MVC 扫描Controller](./notes/NoClassDefFoundError 案例-Spring MVC 扫描Controller.md)
