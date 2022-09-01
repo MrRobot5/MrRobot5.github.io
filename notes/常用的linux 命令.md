@@ -1,6 +1,8 @@
 # 常用的linux 命令
 
-## 文件操作
+## bash
+
+### 文件操作
 
 ```shell
 # 文件内容查找（或者使用notepad++ Find 功能）
@@ -17,7 +19,16 @@ tar -zxvf apache-zookeeper-3.5.5-bin.tar.gz
 
 # 复制 ssh 公钥到粘贴板
 cat ~/.ssh/id_rsa.pub | clip
+
+# 批量创建文件
+touch file{1..5}.txt
 ```
+
+### 配置
+
+路径：D:\Users\yangpan3\AppData\Local\Programs\Git\etc\bash.bashrc
+
+> alias gpp='git pull; git push;'
 
 ## git
 

@@ -25,7 +25,7 @@
 
 ### Notes
 
-- 2022年06月10日 [笔记 - Mysql Transaction Isolation Levels 案例](./notes/笔记 - Mysql Transaction Isolation Levels 案例.md)
+- 2022年08月10日 [笔记-parallel stream 实现原理](./notes/笔记-parallel stream 实现原理.md)
 - 2022年06月08日 [笔记 - 包装模式（Wrapper）案例](./notes/笔记 - 包装模式（Wrapper）案例.md)
 - 2022年01月26日 [Tips-Java CAS 使用实例分析](./notes/Tips-Java CAS 使用实例分析.md)
 - 2021年12月30日 [笔记 - Java 值传递以及相关的知识点](./notes/笔记 - Java 值传递以及相关的知识点.md)
