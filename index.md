@@ -6,7 +6,7 @@
 
 ### Insight
 
-- 2022年05月18日 [Insight SpringBoot MVC 静态资源配置](./notes/Insight SpringBoot MVC 静态资源配置.md)
+- 2022年09月01日 [Insight MybatisPlus logic-delete](./notes/Insight MybatisPlus logic-delete.md)
 - 2021年12月06日 [Insight Mybatis 内嵌查询以及lazyLoader工作原理](./notes/Insight Mybatis 内嵌查询以及lazyLoader工作原理.md)
 - 2021年04月23日 [Insight Spring重复Bean 注册的过程](https://blog.csdn.net/tt50335971/article/details/116066188)
 - 2021年07月23日 [Insight springboot boot spring - EnableAutoConfiguration](https://blog.csdn.net/tt50335971/article/details/119040834)
