@@ -4,8 +4,9 @@
 
 包括常用框架的实现原理Insight，新技术的笔记，开发遇到的问题反思等等。
 
-### Insight
+### Code Insight
 
+- 2022年09月13日 [Insight Spring Profile及应用](./notes/Insight Spring Profile及应用.md)
 - 2022年09月08日 [Insight ShardingJDBC 读写分离路由机制](./notes/Insight ShardingJDBC 读写分离路由机制.md)
 - 2021年12月06日 [Insight Mybatis 内嵌查询以及lazyLoader工作原理](./notes/Insight Mybatis 内嵌查询以及lazyLoader工作原理.md)
 - 2021年04月23日 [Insight Spring重复Bean 注册的过程](https://blog.csdn.net/tt50335971/article/details/116066188)
@@ -25,6 +26,8 @@
 
 ### Notes
 
+- 2022年09月26日 [笔记-Mybatis Interceptor](./notes/笔记-Mybatis Interceptor.md)
+- 2022年09月20日 [笔记 ThreadLocal 应用 - MDC](./notes/笔记 ThreadLocal 应用 - MDC.md)
 - 2022年09月02日 [笔记 MySQL for update 分析及应用](./notes/笔记 MySQL for update 分析及应用.md)
 - 2022年08月10日 [笔记-parallel stream 实现原理](./notes/笔记-parallel stream 实现原理.md)
 - 2022年06月08日 [笔记 - 包装模式（Wrapper）案例](./notes/笔记 - 包装模式（Wrapper）案例.md)
