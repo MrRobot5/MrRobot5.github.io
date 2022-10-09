@@ -4,18 +4,17 @@
 
 ```xml
 <resultMap id="detailResultMap" type="com.foo.model.FooBase">
-	<id column="id" property="id" jdbcType="INTEGER" />
-	<result column="name" property="name" jdbcType="VARCHAR" />
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
     <!-- 通过内嵌查询，实现类似Hibernate 级联查询的功能，支持延时查询-->
-	<collection property="detailList" column="id" javaType="java.util.ArrayList"
-		ofType="com.foo.model.FooDetail"
-		select="com.foo.dao.FooDetailMapper.selectByBaseId" fetchType="lazy"/> 
+    <collection property="detailList" column="id" javaType="java.util.ArrayList"
+        ofType="com.foo.model.FooDetail"
+        <!-- 注意：select 支持默认补充 namespace。如果查询语句在当前 namespace, 可以省略 -->
+        select="com.foo.dao.FooDetailMapper.selectByBaseId" fetchType="lazy"/> 
 </resultMap>
 ```
 
-
-
-## 内嵌查询工作原理
+## ①内嵌查询工作原理
 
 ### nested query xml 解析
 
@@ -36,9 +35,8 @@ private ResultMapping buildResultMappingFromContext(XNode context, Class<?> resu
         processNestedResultMappings(context, Collections.<ResultMapping> emptyList()));
     // 懒加载属性，默认 configuration.isLazyLoadingEnabled() = false。
     boolean lazy = "lazy".equals(context.getStringAttribute("fetchType", configuration.isLazyLoadingEnabled() ? "lazy" : "eager"));
-    
-}
 
+}
 ```
 
 ### nested query 执行过程
@@ -85,15 +83,12 @@ private Object getNestedQueryMappingValue(ResultSet rs, MetaObject metaResultObj
     }
     return value;
 }
-
 ```
 
-
-
-## lazyLoader工作原理
+## ②lazyLoader工作原理
 
 > mybatis 延时查询原理：在将结果集转化为值对象时，会对映射到的属性进行实例化操作。借助动态代理，会将lazyLoader 作为属性添加到值对象中。真正对该值对象读取操作时，代理类拦截并发起真正的数据库查询。
->
+> 
 > `注意：仅限嵌套查询才有延时查询的概念。`
 
 #### 关键类
@@ -108,26 +103,23 @@ private Object getNestedQueryMappingValue(ResultSet rs, MetaObject metaResultObj
  * @see  org.apache.ibatis.executor.resultset.DefaultResultSetHandler#createResultObject
  */
 private Object createResultObject(ResultSetWrapper rsw, ResultMap resultMap, ResultLoaderMap lazyLoader, String columnPrefix) throws SQLException {
-	// 值对象实例化，constructor.newInstance()
-	Object resultObject = createResultObject(rsw, resultMap, constructorArgTypes, constructorArgs, columnPrefix);
-	if (resultObject != null && !hasTypeHandlerForResultObject(rsw, resultMap.getType())) {
-		final List<ResultMapping> propertyMappings = resultMap.getPropertyResultMappings();
-		for (ResultMapping propertyMapping : propertyMappings) {
-			// 检测到存在嵌套查询，并且需要延时加载，对原对象进行代理操作。
-			if (propertyMapping.getNestedQueryId() != null && propertyMapping.isLazy()) {
+    // 值对象实例化，constructor.newInstance()
+    Object resultObject = createResultObject(rsw, resultMap, constructorArgTypes, constructorArgs, columnPrefix);
+    if (resultObject != null && !hasTypeHandlerForResultObject(rsw, resultMap.getType())) {
+        final List<ResultMapping> propertyMappings = resultMap.getPropertyResultMappings();
+        for (ResultMapping propertyMapping : propertyMappings) {
+            // 检测到存在嵌套查询，并且需要延时加载，对原对象进行代理操作。
+            if (propertyMapping.getNestedQueryId() != null && propertyMapping.isLazy()) {
                 // proxy.callback = lazyLoader, 拦截getSet方法，在realObject 读写之前，结束延时的状态。
-				resultObject = configuration.getProxyFactory().createProxy(resultObject, lazyLoader, configuration, objectFactory, constructorArgTypes, constructorArgs);
-				break;
-			}
-		}
-	}
-	this.useConstructorMappings = resultObject != null && !constructorArgTypes.isEmpty(); 
-	return resultObject;
+                resultObject = configuration.getProxyFactory().createProxy(resultObject, lazyLoader, configuration, objectFactory, constructorArgTypes, constructorArgs);
+                break;
+            }
+        }
+    }
+    this.useConstructorMappings = resultObject != null && !constructorArgTypes.isEmpty(); 
+    return resultObject;
 }
-
 ```
-
-
 
 ```java
 /**
@@ -135,13 +127,45 @@ private Object createResultObject(ResultSetWrapper rsw, ResultMap resultMap, Res
  * @see  org.apache.ibatis.executor.loader.ResultLoaderMap.LoadPair#load
  */
 public void load(final Object userObject) throws SQLException {
-	this.metaResultObject.setValue(property, this.resultLoader.loadResult());
+    this.metaResultObject.setValue(property, this.resultLoader.loadResult());
 }
 ```
 
+## ③其他
 
+### Mybatis 默认 namespace
+
+> Namespaces are now required and have a purpose beyond simply isolating statements with longer, fully-qualified names.
+> 
+> 为了隔离和区分 statements, result maps, caches，Mybatis 在xml 解析过程中，对针对一些id 进行默认的 namespace 补充。smart !!!
+
+```java
+/**
+ * 在需要进行唯一识别的场景，会进行默认namespace 补充
+ * @see org.apache.ibatis.builder.MapperBuilderAssistant#applyCurrentNamespace
+ */
+public String applyCurrentNamespace(String base, boolean isReference) {
+	if (base == null) {
+		return null;
+	}
+	if (isReference) {
+		// is it qualified with any namespace yet?
+		if (base.contains(".")) {
+			return base;
+		}
+	} else {
+		// is it qualified with this namespace yet?
+		if (base.startsWith(currentNamespace + ".")) {
+			return base;
+		}
+		if (base.contains(".")) {
+			throw new BuilderException("Dots are not allowed in element names, please remove it from " + base);
+		}
+	}
+	return currentNamespace + "." + base;
+}
+```
 
 ## 参考
 
 [Insight Mybatis 内嵌resultMap工作原理](./Insight Mybatis 内嵌resultMap工作原理.md)
-
