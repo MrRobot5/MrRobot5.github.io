@@ -6,15 +6,17 @@
 
 ### Code Insight
 
+- 2022年11月10日 [Insight mysql driver zeroDateTimeBehavior](./notes/Insight mysql driver zeroDateTimeBehavior.md)
 - 2022年09月13日 [Insight Spring Profile及应用](./notes/Insight Spring Profile及应用.md)
 - 2022年09月08日 [Insight ShardingJDBC 读写分离路由机制](./notes/Insight ShardingJDBC 读写分离路由机制.md)
+- 2022年09月01日 [Insight MybatisPlus logic-delete 实现原理](./notes/Insight MybatisPlus logic-delete.md)
 - 2021年12月06日 [Insight Mybatis 内嵌查询以及lazyLoader工作原理](./notes/Insight Mybatis 内嵌查询以及lazyLoader工作原理.md)
 - 2021年04月23日 [Insight Spring重复Bean 注册的过程](https://blog.csdn.net/tt50335971/article/details/116066188)
 - 2021年07月23日 [Insight springboot boot spring - EnableAutoConfiguration](https://blog.csdn.net/tt50335971/article/details/119040834)
 - 2021年07月01日 [Insight springboot 默认配置文件加载实现](./notes/Insight springboot 默认配置文件加载实现.md)
 - 2020年11月17日 [Insight Spring3 @RequestMapping 自定义Aspect不生效问题](https://blog.csdn.net/tt50335971/article/details/109739630)
-- 2020年10月30日 [Insight Spring Test事务自动回滚的实现](https://blog.csdn.net/tt50335971/article/details/109384564)
-- 2020年09月18日 [Insight Mybatis 日志打印](https://blog.csdn.net/tt50335971/article/details/108670592)
+- 2020年10月30日 [Insight Spring Test事务自动回滚的实现](./notes/Insight Spring Test事务自动回滚的实现.md)
+- 2020年09月18日 [Insight Mybatis 日志打印](./notes/Insight Mybatis 日志打印.md)
 - 2020年09月11日 [Insight Mybatis 内嵌resultMap工作原理](./notes/Insight Mybatis 内嵌resultMap工作原理.md)
 - 2020年04月07日 [Insight mybatis 动态sql解析-part2](https://blog.csdn.net/tt50335971/article/details/105373886)
 - 2019年12月20日 [Insight HandlerInterceptor 与@ExceptionHandler 的执行顺序](https://blog.csdn.net/tt50335971/article/details/103483315)

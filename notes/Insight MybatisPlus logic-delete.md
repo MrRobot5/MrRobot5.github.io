@@ -49,24 +49,22 @@ bindMapperForNamespace:432, XMLMapperBuilder
  * @param field    字段属性对象
  */
 private void initLogicDelete(...) {
-	/* 获取注解属性，逻辑处理字段 */
-	TableLogic tableLogic = field.getAnnotation(TableLogic.class);
-	if (null != tableLogic) {
-		// ...
-	} else if (!existTableLogic) {
-		// 'isDelete'
-		String deleteField = dbConfig.getLogicDeleteField();
-		if (StringUtils.isNotBlank(deleteField) && this.property.equals(deleteField)) {
-			// 0
-			this.logicNotDeleteValue = dbConfig.getLogicNotDeleteValue();
-			this.logicDeleteValue = dbConfig.getLogicDeleteValue();
-			this.logicDelete = true;
-		}
-	}
+    /* 获取注解属性，逻辑处理字段 */
+    TableLogic tableLogic = field.getAnnotation(TableLogic.class);
+    if (null != tableLogic) {
+        // ...
+    } else if (!existTableLogic) {
+        // 'isDelete'
+        String deleteField = dbConfig.getLogicDeleteField();
+        if (StringUtils.isNotBlank(deleteField) && this.property.equals(deleteField)) {
+            // 0
+            this.logicNotDeleteValue = dbConfig.getLogicNotDeleteValue();
+            this.logicDeleteValue = dbConfig.getLogicDeleteValue();
+            this.logicDelete = true;
+        }
+    }
 }
 ```
-
-
 
 ```java
 /**
@@ -78,12 +76,12 @@ public class SelectById extends AbstractMethod {
 
     @Override
     public MappedStatement injectMappedStatement(Class<?> mapperClass, Class<?> modelClass, TableInfo tableInfo) {
-		// SELECT %s FROM %s WHERE %s=#{%s} %s 最后一个参数：逻辑删除条件
+        // SELECT %s FROM %s WHERE %s=#{%s} %s 最后一个参数：逻辑删除条件
         SqlMethod sqlMethod = SqlMethod.SELECT_BY_ID;
         SqlSource sqlSource = new RawSqlSource(configuration, String.format(sqlMethod.getSql(),
             sqlSelectColumns(tableInfo, false),
             tableInfo.getTableName(), tableInfo.getKeyColumn(), tableInfo.getKeyProperty(),
-			// " AND " + logicDeleteFieldInfo.getColumn() + "=" + logicDeleteFieldInfo.getLogicNotDeleteValue();
+            // " AND " + logicDeleteFieldInfo.getColumn() + "=" + logicDeleteFieldInfo.getLogicNotDeleteValue();
             tableInfo.getLogicDeleteSql(true, true)), Object.class);
         return this.addSelectMappedStatementForTable(mapperClass, getMethod(sqlMethod), sqlSource, tableInfo);
     }
@@ -97,5 +95,3 @@ public class SelectById extends AbstractMethod {
 - 
 
 - MybatisPlus 直接在 Mybatis 的源码上修改，简单粗暴👍
-
-

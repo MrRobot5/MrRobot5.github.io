@@ -63,6 +63,11 @@ git reset HEAD
 # 删除分支
 git branch -D fix-xxx
 git push origin -d fix-xxx
+
+
+# 新建分支
+git checkout -b fix-safe-fastjson
+git push -u origin fix-safe-fastjson
 ```
 
 ### 回退到某个版本
