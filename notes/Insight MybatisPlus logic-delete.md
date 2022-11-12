@@ -76,7 +76,7 @@ public class SelectById extends AbstractMethod {
 
     @Override
     public MappedStatement injectMappedStatement(Class<?> mapperClass, Class<?> modelClass, TableInfo tableInfo) {
-        // SELECT %s FROM %s WHERE %s=#{%s} %s 最后一个参数：逻辑删除条件
+        // SELECT ％s FROM ％s WHERE ％s=#{％s} ％s 最后一个参数：逻辑删除条件
         SqlMethod sqlMethod = SqlMethod.SELECT_BY_ID;
         SqlSource sqlSource = new RawSqlSource(configuration, String.format(sqlMethod.getSql(),
             sqlSelectColumns(tableInfo, false),
