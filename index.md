@@ -6,6 +6,7 @@
 
 ### Code Insight
 
+- 2022年12月02日 [Insight H2 database auto increment](./notes/Insight H2 database auto increment.md)
 - 2022年11月10日 [Insight mysql driver zeroDateTimeBehavior](./notes/Insight mysql driver zeroDateTimeBehavior.md)
 - 2022年09月13日 [Insight Spring Profile及应用](./notes/Insight Spring Profile及应用.md)
 - 2022年09月08日 [Insight ShardingJDBC 读写分离路由机制](./notes/Insight ShardingJDBC 读写分离路由机制.md)
