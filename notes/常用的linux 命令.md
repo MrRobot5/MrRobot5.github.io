@@ -22,6 +22,9 @@ cat ~/.ssh/id_rsa.pub | clip
 
 # 批量创建文件
 touch file{1..5}.txt
+
+# 查找文件
+find ./Java -size +10240k -name '*.dll' > tmp.txt
 ```
 
 ### 配置

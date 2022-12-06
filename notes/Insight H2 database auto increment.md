@@ -15,8 +15,6 @@ INSERT INTO sub_table VALUES (?, ?, ?);
 
 那么，自增id 在数据库中是什么样的机制？可以从 H2 数据库实现方案获得启发。
 
-
-
 ## auto_increment Example
 
 ```sql
@@ -36,8 +34,6 @@ CREATE CACHED TABLE PUBLIC.TEST(
 )
 ```
 
-
-
 ## SEQUENCE Example
 
 官方文档 [create_sequence](https://h2database.com/html/commands.html#create_sequence) ✨
@@ -50,8 +46,6 @@ CREATE SEQUENCE SEQ2 AS INTEGER START WITH 10;
 
 **Used values are never re-used, even when the transaction is rolled back.**
 
-
-
 ## Code Insight
 
 ### ①相关的类
@@ -62,8 +56,6 @@ org.h2.expression.SequenceValue
 
 org.h2.schema.Sequence
 
-
-
 ### ②主要实现原理
 
 creat table 实例化过程
@@ -72,13 +64,12 @@ creat table 实例化过程
 // @see org.h2.command.ddl.CreateTable#update
 for (Column c :data.columns) {
     // 如果列定义为 auto_increment， 需要进行dialet 翻译。
-	if (c.isAutoIncrement()) {
-		int objId = getObjectId();
+    if (c.isAutoIncrement()) {
+        int objId = getObjectId();
         // 
-		c.convertAutoIncrementToSequence(session, getSchema(), objId, data.temporary);
-	}
+        c.convertAutoIncrementToSequence(session, getSchema(), objId, data.temporary);
+    }
 }
-
 ```
 
 ```java
@@ -89,29 +80,29 @@ for (Column c :data.columns) {
  * @see org.h2.table.Column#convertAutoIncrementToSequence
  */
 public void convertAutoIncrementToSequence(Session session, Schema schema, int id, boolean temporary) {
-	// 生成唯一的 sequenceName
-	while (true) {
-		ValueUuid uuid = ValueUuid.getNewRandom();
-		String s = uuid.getString();
-		s = s.replace('-', '_').toUpperCase();
-		sequenceName = "SYSTEM_SEQUENCE_" + s;
-		if (schema.findSequence(sequenceName) == null) {
-			break;
-		}
-	}
-	// Sequence 实例化，实现自增生成唯一数据
-	Sequence seq = new Sequence(schema, id, sequenceName, start, increment);
-	if (temporary) {
-		seq.setTemporary(true);
-	} else {
-		// CREATE SEQUENCE, 数据库 Schema 持久化
-		session.getDatabase().addSchemaObject(session, seq);
-	}
-	setAutoIncrement(false, 0, 0);
-	// 把Sequence 包装为表达式片段
-	SequenceValue seqValue = new SequenceValue(seq);
-	setDefaultExpression(session, seqValue);
-	setSequence(seq);
+    // 生成唯一的 sequenceName
+    while (true) {
+        ValueUuid uuid = ValueUuid.getNewRandom();
+        String s = uuid.getString();
+        s = s.replace('-', '_').toUpperCase();
+        sequenceName = "SYSTEM_SEQUENCE_" + s;
+        if (schema.findSequence(sequenceName) == null) {
+            break;
+        }
+    }
+    // Sequence 实例化，实现自增生成唯一数据
+    Sequence seq = new Sequence(schema, id, sequenceName, start, increment);
+    if (temporary) {
+        seq.setTemporary(true);
+    } else {
+        // CREATE SEQUENCE, 数据库 Schema 持久化
+        session.getDatabase().addSchemaObject(session, seq);
+    }
+    setAutoIncrement(false, 0, 0);
+    // 把Sequence 包装为表达式片段
+    SequenceValue seqValue = new SequenceValue(seq);
+    setDefaultExpression(session, seqValue);
+    setSequence(seq);
 }
 ```
 
@@ -120,19 +111,19 @@ Insert 过程
 ```java
 // 遍历 Table 的 columns 和 参数Expression， 执行值填充
 for (int i = 0; i < columnLen; i++) {
-	Column c = columns[i];
-	int index = c.getColumnId();
-	// 获取 Value Expression
-	Expression e = expr[i];
-	if (e != null) {
-		try {
-			// 如果是SequenceValue， 生成自增数字
-			Value v = c.convert(e.getValue(session));
-			newRow.setValue(index, v);
-		} catch (DbException ex) {
-			throw setRow(ex, x, getSQL(expr));
-		}
-	}
+    Column c = columns[i];
+    int index = c.getColumnId();
+    // 获取 Value Expression
+    Expression e = expr[i];
+    if (e != null) {
+        try {
+            // 如果是SequenceValue， 生成自增数字
+            Value v = c.convert(e.getValue(session));
+            newRow.setValue(index, v);
+        } catch (DbException ex) {
+            throw setRow(ex, x, getSQL(expr));
+        }
+    }
 }
 ```
 
@@ -146,10 +137,10 @@ for (int i = 0; i < columnLen; i++) {
  * @return the next value
  */
 public synchronized long getNext(Session session) {
-	// valueWithMargin 计算， flush 过程...
-	long v = value;
-	value += increment;
-	return v;
+    // valueWithMargin 计算， flush 过程...
+    long v = value;
+    value += increment;
+    return v;
 }
 ```
 
@@ -160,15 +151,3 @@ public synchronized long getNext(Session session) {
 - 通过阅读数据库的实现，对于应用开发帮助很大，可以适当的扬长避短。
 
 - 对于SQL 规范，每种数据库都有对应的实现方式，dalect。
-
-
-
-
-
-
-
-
-
-
-
-
