@@ -13,7 +13,8 @@
 - 2022年09月01日 [Insight MybatisPlus logic-delete 实现原理](./notes/Insight MybatisPlus logic-delete.md)
 - 2021年12月06日 [Insight Mybatis 内嵌查询以及lazyLoader工作原理](./notes/Insight Mybatis 内嵌查询以及lazyLoader工作原理.md)
 - 2021年04月23日 [Insight Spring重复Bean 注册的过程](https://blog.csdn.net/tt50335971/article/details/116066188)
-- 2021年07月23日 [Insight springboot boot spring - EnableAutoConfiguration](https://blog.csdn.net/tt50335971/article/details/119040834)
+- 2021年07月23日 [Insight Spring Boot booting 原理 - EnableAutoConfiguration](./notes/Insight Spring Boot booting 原理 - EnableAutoConfiguration.md)
+- 2021年07月22日 [Insight Yaml in Spring Boot](./notes/Insight Yaml in Spring Boot.md)
 - 2021年07月01日 [Insight springboot 默认配置文件加载实现](./notes/Insight springboot 默认配置文件加载实现.md)
 - 2020年11月17日 [Insight Spring3 @RequestMapping 自定义Aspect不生效问题](https://blog.csdn.net/tt50335971/article/details/109739630)
 - 2020年10月30日 [Insight Spring Test事务自动回滚的实现](./notes/Insight Spring Test事务自动回滚的实现.md)
@@ -23,12 +24,14 @@
 - 2019年12月20日 [Insight HandlerInterceptor 与@ExceptionHandler 的执行顺序](https://blog.csdn.net/tt50335971/article/details/103483315)
 - 2019年08月16日 [Insight SpringBoot MVC 错误页面跳转原理](./notes/Insight SpringBoot MVC 错误页面跳转原理.md)
 - 2019年08月08日 [问题分析 NoSuchMethodException: tk.mybatis.mapper.provider.SpecialProvider](./notes/NoSuchMethodException-tk.mybatis.mapper.provider.SpecialProvider 分析.md)
-- 2018年12月25日[Insight SpringBoot 自动配置DataSource](https://blog.csdn.net/tt50335971/article/details/85254730)
+- ‎2018年12月25日[Insight SpringBoot 自动配置DataSource](https://blog.csdn.net/tt50335971/article/details/85254730)
 - 2017年12月14日 [Insight jquery ajax参数序列化](https://blog.csdn.net/tt50335971/article/details/78806833)
 - 2017年01月10日 [Insight Springmvc's validator谈谈程序可扩展实现策略](https://blog.csdn.net/tt50335971/article/details/54313058)
 
 ### Notes
 
+- 2022年12月07日 [笔记 Spring Boot DataSource 知识梳理](./notes/笔记 Spring Boot DataSource 知识梳理.md)
+- 2022年12月06日 [笔记 Spring Boot starter 知识梳理](./notes/笔记 spring boot starter 知识梳理.md)
 - 2022年11月11日 [笔记 前后端列表分页 pagination 知识点](./notes/笔记 前后端列表分页 pagination 知识点.md)
 - 2022年09月20日 [笔记 ThreadLocal 应用 - MDC](./notes/笔记 ThreadLocal 应用 - MDC.md)
 - 2022年09月02日 [笔记 MySQL for update 分析及应用](./notes/笔记 MySQL for update 分析及应用.md)
@@ -43,6 +46,7 @@
 - 2021年02月16日 [笔记 RabbitMQ Tutorials 场景学习](./notes/笔记 RabbitMQ Tutorials 场景学习.md)
 - 2020年09月10日 [snaker 使用指导和设计浅析](./notes/笔记 snaker 使用指导和设计浅析.md)
 - 2020年08月25日 [尝试 QUARKUS - elasticsearch-quickstart](https://blog.csdn.net/tt50335971/article/details/108224036)
+- 2019‎年‎12‎月‎03‎日 [mysql windows 服务配置](./notes/mysql windows 服务配置.md)
 - 2019年08月01日 [清单 mybatis周边组件](https://blog.csdn.net/tt50335971/article/details/98116573)
 - 2018年01月25日 [漫游 ZooKeeper nio通信过程](https://blog.csdn.net/tt50335971/article/details/79163372)
 - 2018年01月04日 [漫游 HttpURLConnection](https://blog.csdn.net/tt50335971/article/details/78975745)

@@ -23,5 +23,9 @@ cd D:/软件/idea
 pwd
 gpp
 
-echo 'await'
+cd /d/workspace-experiment/python
+pwd
+git push -u origin main
+
+echo 'sync success! await 1min ...'
 sleep 1m
