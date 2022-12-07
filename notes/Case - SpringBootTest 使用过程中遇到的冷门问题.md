@@ -51,7 +51,7 @@ public class EmptyApplication {
 ```yml
  MapperAutoConfiguration:
    Did not match:
-	 - @ConditionalOnBean (types: org.apache.ibatis.session.SqlSessionFactory; SearchStrategy: all) did not find any beans (OnBeanCondition)
+     - @ConditionalOnBean (types: org.apache.ibatis.session.SqlSessionFactory; SearchStrategy: all) did not find any beans (OnBeanCondition)
 ```
 
 通过源码，我们可以看到，明明指定了加载顺序，为什么会匹配失败？
@@ -95,16 +95,16 @@ public class MapperAutoConfiguration {
  */
 public void processConfigBeanDefinitions(BeanDefinitionRegistry registry) {
 
-	// Parse each @Configuration class
-	ConfigurationClassParser parser = new ConfigurationClassParser(
-			this.metadataReaderFactory, this.problemReporter, this.environment,
-			this.resourceLoader, this.componentScanBeanNameGenerator, registry);
+    // Parse each @Configuration class
+    ConfigurationClassParser parser = new ConfigurationClassParser(
+            this.metadataReaderFactory, this.problemReporter, this.environment,
+            this.resourceLoader, this.componentScanBeanNameGenerator, registry);
 
-	do {
-		// parse 过程中，引入EmptyApplication。由于EmptyApp 指定exclude MybatisAutoConfiguration，在两次排序合并后，添加到了最后。打乱了 EnableAutoConfiguration 的顺序。
-		parser.parse(candidates);
-		parser.validate();
-	}
+    do {
+        // parse 过程中，引入EmptyApplication。由于EmptyApp 指定exclude MybatisAutoConfiguration，在两次排序合并后，添加到了最后。打乱了 EnableAutoConfiguration 的顺序。
+        parser.parse(candidates);
+        parser.validate();
+    }
 }
 ```
 
@@ -115,7 +115,3 @@ public void processConfigBeanDefinitions(BeanDefinitionRegistry registry) {
 - 这个问题与环境没有关系，与 SpringBootTest 也没有关系，是 SpringBoot 加载机制的问题。
 
 - 工程里尽量不要写多个 SpringBootApplication ，避免不必要的麻烦。目前使用的版本：spring-boot-autoconfigure-1.5.10.RELEASE
-  
-  
-  
-  
