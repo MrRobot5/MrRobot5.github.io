@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Insight H2 database uto increment"
-date:   2022-12-07 18:18:44 +0800
+title:  "Insight H2 database auto increment"
+date:   2022-12-05 17:57:11 +0800
 categories: jekyll update
 ---
 # Insight H2 database auto increment
