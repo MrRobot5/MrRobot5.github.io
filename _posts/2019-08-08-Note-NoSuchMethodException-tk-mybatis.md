@@ -1,9 +1,12 @@
 ---
 layout: post
-title:  "NoSuchMethodException-tk"
-date:   2022-04-19 22:01:46 +0800
+title:  "Insight NoSuchMethodException-tk.mybatis集成Spring Boot 问题"
+date:   2019-08-08 22:01:46 +0800
 categories: jekyll update
 ---
+
+# Insight NoSuchMethodException-tk.mybatis集成Spring Boot 问题
+
 ## 问题
 
         在使用 tk.mybatis组件的过程中，调用 insertList()，报错如题。
@@ -41,7 +44,7 @@ mapper:
 
 
 
-## 实现源码分析
+## Code Insight
 
 ### 关键类
 

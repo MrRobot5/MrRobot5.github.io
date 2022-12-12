@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Insight Spring 泛集合注入以及应用"
-date:   2021-12-09 18:01:05 +0800
+date:   2020-05-09 18:01:05 +0800
 categories: jekyll update
 ---
 # Insight Spring 泛集合注入以及应用
@@ -10,7 +10,7 @@ categories: jekyll update
 >
 > 泛集合是指：Array、Collection、Map。
 
-## Spring 注入泛集合的调用链
+## Spring 泛集合注入的调用链
 
 `构造注入`方式的调用链（Spring Version >= 4.x）：
 
@@ -93,7 +93,7 @@ public class OrderComparator implements Comparator<Object> {
 
 > warning: Spring 3.x 没有对注入的集合没有排序，需要开发者sort，如果需要的话。
 
-## Spring 注入集合的Case
+## Spring 集合注入的应用场景
 
 在项目中与遇到策略模式来解耦业务的场景，通过组合相同接口的Bean来实现。
 

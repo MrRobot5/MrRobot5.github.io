@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "NoClassDefFoundError 案例-Spring MVC 扫描Controller"
+title:  "Case NoClassDefFoundError 案例-Spring MVC 扫描Controller"
 date:   2022-05-10 16:57:19 +0800
 categories: jekyll update
 ---

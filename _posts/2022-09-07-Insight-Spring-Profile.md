@@ -1,9 +1,12 @@
 ---
+
 layout: post
 title:  "Insight Spring Profile及应用"
 date:   2022-09-07 17:46:17 +0800
 categories: jekyll update
+
 ---
+
 # Insight Spring profile及应用
 
 > 监控、动态配置等辅助功能，在开发和测试场景中，并不需要。但是会在spring 启动加载过程中拖慢启动速度，开发、自测效率也受影响。
@@ -18,12 +21,10 @@ categories: jekyll update
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" 
     profile="!speed">
-	<!-- 开发环境不需要的配置 -->
-	<!-- 例如：缓存，连接redis io操作 -->
-	<!-- 例如：mq 消费，连接broker io操作 -->
+    <!-- 开发环境不需要的配置 -->
+    <!-- 例如：缓存，连接redis io操作 -->
+    <!-- 例如：mq 消费，连接broker io操作 -->
 </beans>
-
-
 ```
 
 ```java
@@ -51,8 +52,6 @@ public class AppConfig {
 
 JVM 配置 `-Dspring.profiles.active="speed,profile2"`
 
-
-
 ## Code Insight
 
 > Bean definition profiles provide a mechanism in the core container that allows for registration of different beans in different environments. 
@@ -69,30 +68,28 @@ JVM 配置 `-Dspring.profiles.active="speed,profile2"`
  */
 protected void doRegisterBeanDefinitions(Element root) {
 
-	if (this.delegate.isDefaultNamespace(root)) {
-		// "profile"
-		String profileSpec = root.getAttribute(PROFILE_ATTRIBUTE);
-		if (StringUtils.hasText(profileSpec)) {
-			// profile 格式解析，支持分隔符",; "
-			String[] specifiedProfiles = StringUtils.tokenizeToStringArray(
-					profileSpec, BeanDefinitionParserDelegate.MULTI_VALUE_ATTRIBUTE_DELIMITERS);
-			// 判断profile 是否激活，如果不符合快速失败，直接return
-			if (!getReaderContext().getEnvironment().acceptsProfiles(specifiedProfiles)) {
-				if (logger.isInfoEnabled()) {
-					logger.info("Skipped XML bean definition file due to specified profiles [" + profileSpec + "] not matching: " + getReaderContext().getResource());
-				}
-				return;
-			}
-		}
-	}
-	
-	// 正常解析和注册 bean
-	preProcessXml(root);
-	parseBeanDefinitions(root, this.delegate);
+    if (this.delegate.isDefaultNamespace(root)) {
+        // "profile"
+        String profileSpec = root.getAttribute(PROFILE_ATTRIBUTE);
+        if (StringUtils.hasText(profileSpec)) {
+            // profile 格式解析，支持分隔符",; "
+            String[] specifiedProfiles = StringUtils.tokenizeToStringArray(
+                    profileSpec, BeanDefinitionParserDelegate.MULTI_VALUE_ATTRIBUTE_DELIMITERS);
+            // 判断profile 是否激活，如果不符合快速失败，直接return
+            if (!getReaderContext().getEnvironment().acceptsProfiles(specifiedProfiles)) {
+                if (logger.isInfoEnabled()) {
+                    logger.info("Skipped XML bean definition file due to specified profiles [" + profileSpec + "] not matching: " + getReaderContext().getResource());
+                }
+                return;
+            }
+        }
+    }
+
+    // 正常解析和注册 bean
+    preProcessXml(root);
+    parseBeanDefinitions(root, this.delegate);
 }
 ```
-
-
 
 ### ②@Profile
 
@@ -103,15 +100,13 @@ protected void doRegisterBeanDefinitions(Element root) {
 @Conditional(ProfileCondition.class)
 public @interface Profile {
 
-	/**
-	 * The set of profiles for which the annotated component should be registered.
-	 */
-	String[] value();
+    /**
+     * The set of profiles for which the annotated component should be registered.
+     */
+    String[] value();
 
 }
 ```
-
-
 
 ## 总结
 
@@ -120,5 +115,3 @@ public @interface Profile {
 - spring profile 提供一整套环境切换的方案，更加简化了工程治理。
 
 - 
-
-

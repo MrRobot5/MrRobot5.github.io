@@ -1,9 +1,12 @@
 ---
+
 layout: post
 title:  "Insight mysql driver zeroDateTimeBehavior"
 date:   2022-11-10 15:18:48 +0800
 categories: jekyll update
+
 ---
+
 # Insight mysql driver zeroDateTimeBehavior
 
 ## 使用mysql driver 遇到的问题

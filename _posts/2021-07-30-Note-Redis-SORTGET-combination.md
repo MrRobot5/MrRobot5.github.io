@@ -1,9 +1,12 @@
 ---
+
 layout: post
 title:  "漫游 Redis SORTGET combination"
 date:   2021-07-30 17:39:42 +0800
 categories: jekyll update
+
 ---
+
 # 漫游 Redis *SORT/GET* combination
 
 ## 缘起
@@ -13,9 +16,9 @@ categories: jekyll update
 ## Retwis-J 设计方案
 
 > A common problem with any store is dealing efficiently with normalized data. 
->
+> 
 > A simple approach would be simply iterate through the list and load each post one by one but clearly this is not efficient as it means a lot of (slow) IO activity between the application and the database.
->
+> 
 > The best solution in such cases it to use the *SORT/GET* combination which allows data to be loaded based on its key - more information [here](http://redis.io/commands/sort). SORT/GET can be seen as the equivalent of RDBMS *join*. 
 
 ## SORT/GET combination 使用说明
@@ -65,32 +68,28 @@ Spring Data provides support for the *SORT/GET* pattern through its `sort` metho
 // spring-data-redis 提供的StringRedisTemplate 支持上述sort 的combination 操作
 // String pid = "pid:*->";
 SortQuery<String> query = SortQueryBuilder.sort(key).noSort().get(pidKey).get(pid + uid).get(pid + content).get(pid + replyPid).get(pid + replyUid).get(pid + time).limit(range.begin, range.end).build();
-
 ```
 
 ```java
 // 查询结果处理
 BulkMapper<WebPost, String> hm = new BulkMapper<WebPost, String>() {
-	@Override
-	public WebPost mapBulk(List<String> bulk) {
-		Map<String, String> map = new LinkedHashMap<String, String>();
-		Iterator<String> iterator = bulk.iterator();
-		// 对应上述SORT/GET 命令的结果集，通过遍历得到对应的结果
-		String pid = iterator.next();
-		map.put(uid, iterator.next());
-		map.put(content, iterator.next());
-		map.put(replyPid, iterator.next());
-		map.put(replyUid, iterator.next());
-		map.put(time, iterator.next());
+    @Override
+    public WebPost mapBulk(List<String> bulk) {
+        Map<String, String> map = new LinkedHashMap<String, String>();
+        Iterator<String> iterator = bulk.iterator();
+        // 对应上述SORT/GET 命令的结果集，通过遍历得到对应的结果
+        String pid = iterator.next();
+        map.put(uid, iterator.next());
+        map.put(content, iterator.next());
+        map.put(replyPid, iterator.next());
+        map.put(replyUid, iterator.next());
+        map.put(time, iterator.next());
 
-		return convertPost(pid, map);
-	}
+        return convertPost(pid, map);
+    }
 };
 List<WebPost> sort = template.sort(query, hm);
-
 ```
-
-
 
 ## 参考
 
@@ -101,4 +100,3 @@ List<WebPost> sort = template.sort(query, hm);
 [Redis sort命令详解](https://cloud.tencent.com/developer/article/1491232)
 
 [Tutorial: Design and implementation of a simple Twitter clone using PHP and the Redis key-value store](https://redis.io/topics/twitter-clone)
-

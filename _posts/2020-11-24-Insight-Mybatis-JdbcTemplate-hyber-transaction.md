@@ -1,9 +1,12 @@
 ---
+
 layout: post
 title:  "Insight Mybatis JdbcTemplate 混合事务控制的实现"
 date:   2020-11-24 21:45:24 +0800
 categories: jekyll update
+
 ---
+
 # Insight Mybatis JdbcTemplate 混合事务控制的实现
 
 ## 混合使用的背景
@@ -55,26 +58,25 @@ org.mybatis.spring.SqlSessionTemplate.SqlSessionInterceptor
  * 给当前线程绑定一个 SqlSession对象，这样就能够保证后续的持久化操作获取的都是这个 SqlSession对象。
  */
 private class SqlSessionInterceptor implements InvocationHandler {
-	@Override
-	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         // 从Spring事务管理器获取 sqlSession，或者在需要时创建一个新sqlSession。
         // Retrieve a sqlSession for the given key that is bound to the current thread.
         // @see SqlSessionUtils#getSqlSession
-		SqlSession sqlSession = getSqlSession(...);
-		try {
-			Object result = method.invoke(sqlSession, args);
-			if (!isSqlSessionTransactional(sqlSession, SqlSessionTemplate.this.sqlSessionFactory)) {
-				// force commit even on non-dirty sessions because some databases require
-				// a commit/rollback before calling close()
-				sqlSession.commit(true);
-			}
-			return result;
-		} catch (Throwable t) {
-			// ...
-		}
-	}
+        SqlSession sqlSession = getSqlSession(...);
+        try {
+            Object result = method.invoke(sqlSession, args);
+            if (!isSqlSessionTransactional(sqlSession, SqlSessionTemplate.this.sqlSessionFactory)) {
+                // force commit even on non-dirty sessions because some databases require
+                // a commit/rollback before calling close()
+                sqlSession.commit(true);
+            }
+            return result;
+        } catch (Throwable t) {
+            // ...
+        }
+    }
 }
-
 ```
 
 ```java
@@ -113,23 +115,23 @@ public class SpringManagedTransaction implements Transaction {
 
 ```java
 public <T> T execute(CallableStatementCreator csc, CallableStatementCallback<T> action) {
-	// 和Mybatis SpringManagedTransaction 获取Connection 调用同样的方法。
-	Connection con = DataSourceUtils.getConnection(getDataSource());
-	CallableStatement cs = null;
-	try {
-		cs = csc.createCallableStatement(conToUse);
-		applyStatementSettings(cs);
-		T result = action.doInCallableStatement(csToUse);
-		handleWarnings(cs);
-		return result;
-	}
-	catch (SQLException ex) {
-		// ...
-	}
-	finally {
-		JdbcUtils.closeStatement(cs);
-		DataSourceUtils.releaseConnection(con, getDataSource());
-	}
+    // 和Mybatis SpringManagedTransaction 获取Connection 调用同样的方法。
+    Connection con = DataSourceUtils.getConnection(getDataSource());
+    CallableStatement cs = null;
+    try {
+        cs = csc.createCallableStatement(conToUse);
+        applyStatementSettings(cs);
+        T result = action.doInCallableStatement(csToUse);
+        handleWarnings(cs);
+        return result;
+    }
+    catch (SQLException ex) {
+        // ...
+    }
+    finally {
+        JdbcUtils.closeStatement(cs);
+        DataSourceUtils.releaseConnection(con, getDataSource());
+    }
 }
 ```
 
@@ -140,18 +142,3 @@ public <T> T execute(CallableStatementCreator csc, CallableStatementCallback<T> 
 - 如果Spring 事务是否启用的判断方式是根据`当前线程的ThreadLocal 是否有初始化`。
 - 如果需要把事务托管给Spring，最简单的是通过 `DataSourceUtils.getConnection` 获取连接。
 - 借鉴Spring 框架的集成Mybatis 的方式，为后续的通用设计提供参考。
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

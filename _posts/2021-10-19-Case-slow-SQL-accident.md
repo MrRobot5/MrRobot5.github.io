@@ -1,10 +1,13 @@
 ---
+
 layout: post
-title:  "笔记 因为慢SQL导致的线上服务不可用"
+title:  "Case 因为慢SQL导致的线上服务不可用"
 date:   2021-10-19 21:34:11 +0800
 categories: jekyll update
+
 ---
-# 笔记 因为慢SQL导致的线上服务不可用
+
+# Case 因为慢SQL导致的线上服务不可用
 
 > 记一次线上事故排查过程，事故的根本原因是慢SQL 查询。但线上问题的情况以及监控工具指标表现，并没有直接指向慢SQL 的问题，排查的过程值得记录和反思。
 
@@ -53,28 +56,28 @@ DruidDataSource 实现线程池的机制是典型的生成者、消费者模式�
 
 ```java
 private DruidConnectionHolder pollLast(long nanos) throws InterruptedException {
-	for (;;) {
-		if (poolingCount == 0) {
-			try {
-				long startEstimate = estimate;
-				// 如果连接池的连接都在工作，那么就需要等待
-				estimate = notEmpty.awaitNanos(estimate); // signal by recycle or creator
-				notEmptyWaitCount++;
-				notEmptyWaitNanos += (startEstimate - estimate);
-			} catch (InterruptedException ie) {
-				notEmpty.signal(); // propagate to non-interrupted thread
-			} finally {
-				notEmptyWaitThreadCount--;
-			}
-		}
-		
-		// 从连接池获取空闲的连接，并标记
-		decrementPoolingCount();
-		DruidConnectionHolder last = connections[poolingCount];
-		connections[poolingCount] = null;
+    for (;;) {
+        if (poolingCount == 0) {
+            try {
+                long startEstimate = estimate;
+                // 如果连接池的连接都在工作，那么就需要等待
+                estimate = notEmpty.awaitNanos(estimate); // signal by recycle or creator
+                notEmptyWaitCount++;
+                notEmptyWaitNanos += (startEstimate - estimate);
+            } catch (InterruptedException ie) {
+                notEmpty.signal(); // propagate to non-interrupted thread
+            } finally {
+                notEmptyWaitThreadCount--;
+            }
+        }
 
-		return last;
-	}
+        // 从连接池获取空闲的连接，并标记
+        decrementPoolingCount();
+        DruidConnectionHolder last = connections[poolingCount];
+        connections[poolingCount] = null;
+
+        return last;
+    }
 }
 ```
 
@@ -94,8 +97,3 @@ UPDATE `orders` SET `order_carrier_tel`='xxx-xxx-5501' WHERE `order_carrier_name
 
 1. 敬畏每一次上线。对于关键系统的code review 是不可缺失的，一次的疏忽或者冷门功能点的问题，都会导致线上的事故。
 2. 90%的问题是出在数据库交互过程中。平时的代码编写，SQL编写一定要慎重。只有面对线上环境的请求和庞大的数据量时，才是真正的考验。
-
-
-
-
-

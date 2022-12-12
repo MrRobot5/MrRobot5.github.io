@@ -1,10 +1,13 @@
 ---
+
 layout: post
-title:  "snippets-单例写法"
+title:  "笔记 snippets-单例写法"
 date:   2021-12-01 18:11:29 +0800
 categories: jekyll update
+
 ---
-# snippets-单例写法
+
+# 笔记 snippets-单例写法
 
 ## 常用写法 double check
 
@@ -20,20 +23,16 @@ private static volatile DefaultConversionService sharedInstance;
  * @since 4.3.5
  */
 public static ConversionService getSharedInstance() {
-	if (sharedInstance == null) {
-		synchronized (DefaultConversionService.class) {
-			if (sharedInstance == null) {
-				sharedInstance = new DefaultConversionService();
-			}
-		}
-	}
-	return sharedInstance;
+    if (sharedInstance == null) {
+        synchronized (DefaultConversionService.class) {
+            if (sharedInstance == null) {
+                sharedInstance = new DefaultConversionService();
+            }
+        }
+    }
+    return sharedInstance;
 }
-
-
 ```
-
-
 
 ## 枚举写法
 
@@ -41,73 +40,15 @@ public static ConversionService getSharedInstance() {
 
 ```java
 public enum TaskManager {
-	SINGLETON;
-	
-	private ThreadPoolExecutor executor;
+    SINGLETON;
 
-	private void init() {
-		SynchronousQueue<Runnable> synchronousQueue = new SynchronousQueue<Runnable>();
-		executor = new ThreadPoolExecutor(0, Integer.MAX_VALUE, new Long(60L),
-				TimeUnit.SECONDS, synchronousQueue, new AtomikosThreadFactory());
-	}
-    
+    private ThreadPoolExecutor executor;
+
+    private void init() {
+        SynchronousQueue<Runnable> synchronousQueue = new SynchronousQueue<Runnable>();
+        executor = new ThreadPoolExecutor(0, Integer.MAX_VALUE, new Long(60L),
+                TimeUnit.SECONDS, synchronousQueue, new AtomikosThreadFactory());
+    }
+
 }
-
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

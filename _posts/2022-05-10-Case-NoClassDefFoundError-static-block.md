@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "NoClassDefFoundError案例-static 代码块"
+title:  "Case NoClassDefFoundError案例-static 代码块"
 date:   2022-05-10 15:22:06 +0800
 categories: jekyll update
 ---

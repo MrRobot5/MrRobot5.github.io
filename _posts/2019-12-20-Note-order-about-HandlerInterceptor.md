@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  "Insight HandlerInterceptor 与@ExceptionHandler 的执行顺序"
-date:   2022-09-13 14:54:42 +0800
+title:  "Insight HandlerInterceptor 与@ExceptionHandler 的顺序"
+date:   2019-12-20 14:54:42 +0800
 categories: jekyll update
 ---
-# Insight HandlerInterceptor 与@ExceptionHandler 的执行顺序
+# Insight HandlerInterceptor 与@ExceptionHandler 的顺序
 
 > 项目中HandlerInterceptor preHandle方法会把登录的用户信息存储在ThreadLocal，方便请求逻辑中获取，
 > 

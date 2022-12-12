@@ -1,9 +1,12 @@
 ---
+
 layout: post
 title:  "笔记-Github Pages搭建个人主页"
 date:   2022-12-10 00:35:46 +0800
 categories: jekyll update
+
 ---
+
 # 笔记-Github Pages搭建个人主页
 
 > 一切要从 Testing your GitHub Pages site locally with Jekyll 说起。跟着官方教程认真学习一番。
@@ -49,7 +52,3 @@ bundle exec jekyll serve
 - GitHub Pages 站点是使用 GitHub Actions 工作流生成和部署的。工作流是默认的，**不用做任何修改**。
 
 - 可以通过查询 workflow run history 和日志来排查问题
-
-
-
-

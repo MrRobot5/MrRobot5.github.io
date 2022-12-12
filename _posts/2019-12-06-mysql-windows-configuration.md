@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "mysql windows 服务配置"
-date:   2022-12-06 17:37:49 +0800
+date:   2019-12-06 17:37:49 +0800
 categories: jekyll update
 ---
 ## mysql windows 服务配置

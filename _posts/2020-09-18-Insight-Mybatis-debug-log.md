@@ -1,17 +1,20 @@
 ---
+
 layout: post
-title:  "Insight Mybatis 日志打印"
+title:  "Insight Mybatis 日志（动态代理Example）"
 date:   2020-09-18 18:06:18 +0800
 categories: jekyll update
+
 ---
-# Insight Mybatis 日志打印
+
+# Insight Mybatis 日志（动态代理Example）
 
 ## 日志打印引发的疑问
 
 > 在使用Mybatis 查询过程中，会有如下日志打印：
->
+> 
 > *DEBUG com.foo.dao.FooMapper.selectFooList - <== Total: 276*
->
+> 
 > 我们知道，Mybatis 只有接口，并不存在日志中的这个类和对应的方法，那么Mybatis 执行日志是怎么打印的？
 
 ## Insight 分析和总结
@@ -23,9 +26,9 @@ categories: jekyll update
 5. Mybatis 能实现基于接口的数据库操作，就是基于动态代理的实现的。动态代理的使用在Mybatis 的实现中随处可见。
 6. `既然一个类对应一个代理实现类，那么能不能用静态代理去实现呢？`如果是全部的方法增强，那么可以静态代理，如果是个别方法去增强，那么还是动态代理更加方便和灵活。打印日志只需要对个别的方法进行拦截，在不侵入原有数据库从操作逻辑的前提下，还是动态代理更加合适。
 
-## 源码分析
+## Code Insight
 
-### 日志增强的切入点
+### ①日志增强的切入点
 
 ```java
 /**
@@ -36,19 +39,17 @@ categories: jekyll update
  * @from org.apache.ibatis.executor.BaseExecutor#getConnection
  */
 protected Connection getConnection(Log statementLog) throws SQLException {
-	Connection connection = transaction.getConnection();
-	if (statementLog.isDebugEnabled()) {
-		// 针对日志DEBUG级别，会对当前的connection 进行代理，通过statementLog 打印日志和传递Logger
-		return ConnectionLogger.newInstance(connection, statementLog, queryStack);
-	} else {
-		return connection;
-	}
+    Connection connection = transaction.getConnection();
+    if (statementLog.isDebugEnabled()) {
+        // 针对日志DEBUG级别，会对当前的connection 进行代理，通过statementLog 打印日志和传递Logger
+        return ConnectionLogger.newInstance(connection, statementLog, queryStack);
+    } else {
+        return connection;
+    }
 }
 ```
 
-
-
-### 结果集打印的实现
+### ②结果集打印的实现
 
 ```java
 /**
@@ -57,42 +58,42 @@ protected Connection getConnection(Log statementLog) throws SQLException {
  */
 public final class ResultSetLogger extends BaseJdbcLogger implements InvocationHandler {
 
-	@Override
-	public Object invoke(Object proxy, Method method, Object[] params) throws Throwable {
-		try {
-			if (Object.class.equals(method.getDeclaringClass())) {
-				return method.invoke(this, params);
-			}
-			Object o = method.invoke(rs, params);
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] params) throws Throwable {
+        try {
+            if (Object.class.equals(method.getDeclaringClass())) {
+                return method.invoke(this, params);
+            }
+            Object o = method.invoke(rs, params);
             // 拦截next() 方法，进行row count统计和结果数据打印。 
-			if ("next".equals(method.getName())) {
-				if (((Boolean) o)) {
-					rows++;
+            if ("next".equals(method.getName())) {
+                if (((Boolean) o)) {
+                    rows++;
                     // 如果应用的日志级别为TRACE， Mybatis 会详细的打印出ResultSet 的所有返回数据。
-					if (isTraceEnabled()) {
-						ResultSetMetaData rsmd = rs.getMetaData();
-						final int columnCount = rsmd.getColumnCount();
-						if (first) {
-							first = false;
-							printColumnHeaders(rsmd, columnCount);
-						}
-						printColumnValues(columnCount);
-					}
-				} else {
+                    if (isTraceEnabled()) {
+                        ResultSetMetaData rsmd = rs.getMetaData();
+                        final int columnCount = rsmd.getColumnCount();
+                        if (first) {
+                            first = false;
+                            printColumnHeaders(rsmd, columnCount);
+                        }
+                        printColumnValues(columnCount);
+                    }
+                } else {
                     // 结果集遍历完后，打印 Total 信息，解答本文的疑问。
-					debug("     Total: " + rows, false);
-				}
-			}
-			clearColumnInfo();
-			return o;
-		} catch (Throwable t) {
-			throw ExceptionUtil.unwrapThrowable(t);
-		}
-	}
+                    debug("     Total: " + rows, false);
+                }
+            }
+            clearColumnInfo();
+            return o;
+        } catch (Throwable t) {
+            throw ExceptionUtil.unwrapThrowable(t);
+        }
+    }
 }
 ```
 
-### Mybatis 日志打印配置
+### ③Mybatis 日志打印配置
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -115,6 +116,4 @@ public final class ResultSetLogger extends BaseJdbcLogger implements InvocationH
         <Logger name="com.foo.dao" level="TRACE" additivity="true"/>
     </Loggers>
 </Configuration>
-
 ```
-

@@ -1,10 +1,13 @@
 ---
+
 layout: post
-title:  "笔记 - Java 值传递以及相关的知识点"
+title:  "笔记 Java 值传递以及相关的知识点"
 date:   2021-12-30 10:15:23 +0800
 categories: jekyll update
+
 ---
-# 笔记 - Java 值传递以及相关的知识点
+
+# 笔记 Java 值传递以及相关的知识点
 
 ## Java 值传递典型例子
 
@@ -34,20 +37,20 @@ public class TestStr {
 
 ## 相关名词和概念
 
-### 值传递(pass by value) 
+### 值传递(pass by value)
 
 > 值传递(pass by value)：在调用函数时，将实际参数复制一份传递到函数中，这样在函数中对参数进行修改，就不会影响到原来的实际参数；
->
+> 
 > When a parameter is pass-by-value, the caller and the callee method operate on two different variables which are copies of each other. **Any changes to one variable don't modify the other.**
->
+> 
 > It means that while calling a method, **parameters passed to the callee method will be clones of original parameters.** Any modification done in callee method will have no effect on the original parameters in caller method.
 
 ### 引用传递(pass by reference)
 
 > 引用传递(pass by reference): 在调用函数时，将实际参数的地址直接传递到函数中。这样在函数中对参数进行的修改，就会影响到实际参数；
->
+> 
 > When a parameter is pass-by-reference, **the caller and the callee operate on the same object.**
->
+> 
 > It means that when a variable is pass-by-reference, **the unique identifier of the object is sent to the method.** Any changes to the parameter’s instance members will result in that change being made to the original value.
 
 ### values and references
@@ -55,8 +58,6 @@ public class TestStr {
 在 Java 中，原始类型变量（ Primitive variables ）存储的就是实际的值，非原始变量存储的引用变量（ reference variables ）（指向它们所引用的对象的地址 the addresses of the objects）。
 
 值和引用都存储在堆栈内存中 （ Both values and references are stored in the stack memory ）。
-
-
 
 ## 其他编程语言的例子
 
@@ -80,14 +81,14 @@ console.log(name);      //output: zhangsan
 #include<iostream>
 using namespace std;
 void change(int &i) {
-	i = i+2;
+    i = i+2;
 }
 
 int main() {
-	int i = 0;
-	cout << "Value of i before change is :" << i << endl;
-	change(i);
-	cout << "Value of i now is :" << i << endl;
+    int i = 0;
+    cout << "Value of i before change is :" << i << endl;
+    change(i);
+    cout << "Value of i now is :" << i << endl;
 }
 ```
 
@@ -98,11 +99,8 @@ $ g++ change.cpp -o change
 $ ./change
 ```
 
-
-
 ## 参考
 
 - [JAVA：值传递和引用传递_SummerOfFoam的博客-CSDN博客](https://blog.csdn.net/SummerOfFoam/article/details/109570841)
 - [JS中的值传递 - 知乎](https://zhuanlan.zhihu.com/p/29291240)
 - [Pass-By-Value as a Parameter Passing Mechanism in Java | Baeldung](https://www.baeldung.com/java-pass-by-value-or-pass-by-reference)
-

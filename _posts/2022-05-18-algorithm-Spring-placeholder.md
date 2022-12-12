@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  "Snippet-Spring中的算法-占位符查找"
+title:  "算法 Spring中的算法-占位符查找"
 date:   2022-05-18 15:18:13 +0800
 categories: jekyll update
 ---
-## Snippet-Spring中的算法-占位符查找
+## 算法 Spring中的算法-占位符查找
 
 ```java
 /**

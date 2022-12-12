@@ -1,16 +1,19 @@
 ---
+
 layout: post
-title:  "Insight mybatis 动态sql解析-part2"
+title:  "Case mybatis 动态sql解析-使用问题"
 date:   2020-04-07 21:12:24 +0800
 categories: jekyll update
+
 ---
-# insight mybatis 动态sql解析-part2
 
-> part1 主要分析动态sql 参数相关的解析，对于xml-> sql 的过程没有详细分析，此文补上。
+# Case mybatis 动态sql解析-使用问题
 
-[part1 GO.](https://blog.csdn.net/tt50335971/article/details/72484023)
+> part1 主要分析动态sql 参数相关的解析，对于xml-> sql 的过程没有详细分析，此文补上。[part1 GO.](https://blog.csdn.net/tt50335971/article/details/72484023)
+> 
+> 问题：工作中遇到的一个bug，mybatis 查询有个参数为0，导致拼接的sql异常。
 
-增加part2源码分析的原因，工作中遇到的一个bug，mybatis 查询有个参数为0，导致拼接的sql异常。需要定位问题原因。
+
 
 ## 问题
 
@@ -41,20 +44,17 @@ boolean test = evaluator.evaluateBoolean("source == ''", ImmutableMap.of("source
 
 ```java
 public boolean evaluateBoolean(String expression, Object parameterObject) {
-	try {
-		Object value = Ognl.getValue(expression, parameterObject);
-		if (value instanceof Boolean) return (Boolean) value;
+    try {
+        Object value = Ognl.getValue(expression, parameterObject);
+        if (value instanceof Boolean) return (Boolean) value;
         // 需要特别注意的是，表达式解析也支持返回为数字，如果为0， 则返回false
-		if (value instanceof Number) return !new BigDecimal(String.valueOf(value)).equals(BigDecimal.ZERO);
-		return value != null;
-	} catch (OgnlException e) {
-		throw new BuilderException("Error evaluating expression '" + expression + "'. Cause: " + e, e);
-	}
+        if (value instanceof Number) return !new BigDecimal(String.valueOf(value)).equals(BigDecimal.ZERO);
+        return value != null;
+    } catch (OgnlException e) {
+        throw new BuilderException("Error evaluating expression '" + expression + "'. Cause: " + e, e);
+    }
 }
-
 ```
-
-
 
 ## 问题总结
 

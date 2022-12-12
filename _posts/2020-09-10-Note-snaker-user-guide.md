@@ -1,9 +1,12 @@
 ---
+
 layout: post
 title:  "笔记 snaker 使用指导和设计浅析"
 date:   2020-09-10 18:31:01 +0800
 categories: jekyll update
+
 ---
+
 # snaker 使用指导和设计浅析
 
 ## snaker 介绍
@@ -34,22 +37,20 @@ http://git.oschina.net/yuqs/snaker-designer
 ### 官方示例参考
 
 * snaker-core 源码工程test
-
+  
   > 主要提供流程引擎的组件和功能点的测试、API使用用例。
-  >
+  > 
   > 提供全部支持的流程模型测试用例，可以在 snakerflow\snaker-core\src\test\resources\test 路径下找到
 
 * snaker-spring 源码工程test
-
+  
   > spring 集成示例
 
 * snaker-web 源码工程
-
+  
   > 完整的工作流程应用实例。业务使用、集成snaker，完全可以参考该工程配置。
-  >
+  > 
   > 技术栈：SpringMVC + shiro + Hibernate + snaker + raphael.js + mysql
-
-
 
 ### 流程设计器
 
@@ -66,8 +67,6 @@ web 流程设计器提供在线设计、编辑和保存流程模型。参考snak
 具体的节点属性配置，在弹出的表单配置即可。
 
 也可以在生成的xml 流程模型文件中修改属性，重新上传即可实现刷新、覆盖。
-
-
 
 ### 应用开发API使用方式
 
@@ -91,8 +90,6 @@ SnakerEngine engine = new Configuration().buildSnakerEngine();
 </bean>
 ```
 
-
-
 #### 部署流程模型
 
 ```java
@@ -107,7 +104,6 @@ engine.process().deploy(StreamHelper.getStreamFromClasspath("test/task/simple/pr
 Order order = engine.startInstanceById(processId, operator, args);
 // 根据流程名称启动流程实例
 Order order = engine.startInstanceByName(name, version, operator);
-
 ```
 
 #### 查询任务
@@ -132,8 +128,6 @@ for(Task task : tasks) {
 // 根据任务提交请求，执行任务。args 可以认同为提交的表单内容。
 engine.executeTask(task.getId(), "foo", args);
 ```
-
-
 
 ### snaker-web 使用指导
 
@@ -192,13 +186,9 @@ public List<Task> executeTask(String taskId, String operator, Map<String, Object
 }
 ```
 
-
-
 #### 流程定义文件的保存
 
 snker 的流程模型是以字节码的形式存在数据库中的。
-
-
 
 #### 流程定义版本支持
 
@@ -221,6 +211,3 @@ public Process getProcessByVersion(String name, Integer version) {
     return processs.get(0);
 }
 ```
-
-
-

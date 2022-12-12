@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  "Tips-Java CAS 使用实例分析"
+title:  "笔记 Java CAS 使用实例分析"
 date:   2022-04-19 22:00:47 +0800
 categories: jekyll update
 ---
-# Tips-Java CAS 使用实例分析
+# 笔记 Java CAS 使用实例分析
 
 > 并发编程在实际生产应用中，如果使用不当，会有意想不到的诡异问题。
 >

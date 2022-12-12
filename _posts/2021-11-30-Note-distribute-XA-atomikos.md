@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  "分布式事务-XA模式与atomikos框架浅析"
+title:  "笔记 分布式事务-XA模式与atomikos框架浅析"
 date:   2021-11-30 17:58:34 +0800
 categories: jekyll update
 ---
-# 分布式事务-XA模式与atomikos框架浅析
+# 笔记 分布式事务-XA模式与atomikos框架浅析
 
 
 

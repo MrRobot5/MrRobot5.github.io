@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Insight SpringBoot MVC 错误页面跳转原理"
-date:   2022-05-18 15:56:37 +0800
+date:   2019-08-16 15:56:37 +0800
 categories: jekyll update
 ---
 ## Insight SpringBoot MVC 错误页面跳转原理
@@ -31,7 +31,7 @@ categories: jekyll update
 
 * WhitelabelErrorViewConfiguration **我们看到的 spring-boot 默认错误页**
 
-## 实现原理分析
+## Code Insight
 
 ErrorPageFilter  实现web错误页跳转是通过来，非嵌入式应用程序(即已部署的WAR文件)提供。作用是过滤请求并转发到错误页，而不是让容器（例如：Tomcat）处理它们。
 

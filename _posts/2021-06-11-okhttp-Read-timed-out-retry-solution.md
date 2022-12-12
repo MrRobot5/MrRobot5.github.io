@@ -1,10 +1,13 @@
 ---
+
 layout: post
-title:  "okhttp Read timed out 重试方案解疑"
+title:  "笔记 okhttp Read timed out 重试方案解疑"
 date:   2021-06-11 15:59:56 +0800
 categories: jekyll update
+
 ---
-# okhttp Read timed out 重试方案解疑
+
+# 笔记 okhttp Read timed out 重试方案解疑
 
 ## 疑问
 
@@ -21,16 +24,14 @@ categories: jekyll update
 > This interceptor recovers from failures and follows redirects as necessary.
 
 1. **add authentication headers**
-
+   
    ```java
    // 针对未授权的异常(HTTP Status-Code .401: Unauthorized)，尝试调用authenticate(), 继续请求操作
    client.authenticator().authenticate(route, userResponse);
    ```
 
-   
-
 2. **follow redirects**
-
+   
    ```java
    /**
     * 针对重定向的异常
@@ -43,10 +44,8 @@ categories: jekyll update
    HttpUrl url = userResponse.request().url().resolve(location);
    ```
 
-   
-
 3. **handle a client request timeout**(稀有场景)
-
+   
    ```java
    case HTTP_CLIENT_TIMEOUT:
    // 408's are rare in practice, but some servers like HAProxy use this response code. The
@@ -74,20 +73,17 @@ if (e instanceof InterruptedIOException) {
 ## SocketTimeoutException 方案
 
 1. 根据情况，适当调整timeout设置
-
+   
    ```java
    new OkHttpClient.Builder()         
        .connectTimeout(10, TimeUnit.SECONDS)
        .writeTimeout(5, TimeUnit.SECONDS)
        .readTimeout(10, TimeUnit.SECONDS)
        .build();
-   
    ```
 
-   
-
 2. 增加重试机制，对网络的波动进行容错
-
+   
    实现Interceptor接口，对SocketTimeoutException catch 重试。
 
 ## 总结
@@ -100,35 +96,28 @@ if (e instanceof InterruptedIOException) {
 
 ```java
 Response getResponseWithInterceptorChain() throws IOException {
-	// Build a full stack of interceptors.
-	List<Interceptor> interceptors = new ArrayList<>();
+    // Build a full stack of interceptors.
+    List<Interceptor> interceptors = new ArrayList<>();
     // 自定义的拦截器优先执行
-	interceptors.addAll(client.interceptors());
-	interceptors.add(retryAndFollowUpInterceptor);
-	interceptors.add(new BridgeInterceptor(client.cookieJar()));
-	interceptors.add(new CacheInterceptor(client.internalCache()));
-	interceptors.add(new ConnectInterceptor(client));
-	if (!forWebSocket) {
-	  interceptors.addAll(client.networkInterceptors());
-	}
+    interceptors.addAll(client.interceptors());
+    interceptors.add(retryAndFollowUpInterceptor);
+    interceptors.add(new BridgeInterceptor(client.cookieJar()));
+    interceptors.add(new CacheInterceptor(client.internalCache()));
+    interceptors.add(new ConnectInterceptor(client));
+    if (!forWebSocket) {
+      interceptors.addAll(client.networkInterceptors());
+    }
     // 真正的发起网络请求
-	interceptors.add(new CallServerInterceptor(forWebSocket));
+    interceptors.add(new CallServerInterceptor(forWebSocket));
 
-	Interceptor.Chain chain = new RealInterceptorChain(interceptors, null, null, null, 0,
-		originalRequest, this, eventListener, client.connectTimeoutMillis(),
-		client.readTimeoutMillis(), client.writeTimeoutMillis());
-	// 调用链发起调用
-	return chain.proceed(originalRequest);
+    Interceptor.Chain chain = new RealInterceptorChain(interceptors, null, null, null, 0,
+        originalRequest, this, eventListener, client.connectTimeoutMillis(),
+        client.readTimeoutMillis(), client.writeTimeoutMillis());
+    // 调用链发起调用
+    return chain.proceed(originalRequest);
 }
 ```
-
-
 
 ## 参考
 
 [浅析 OkHttp 拦截器之 RetryAndFollowUpInterceptor](https://blog.csdn.net/firefile/article/details/75346937)
-
-
-
-
-

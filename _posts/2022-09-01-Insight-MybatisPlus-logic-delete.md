@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Insight MybatisPlus logic-delete"
-date:   2022-11-12 10:19:58 +0800
+date:   2022-09-01 10:19:58 +0800
 categories: jekyll update
 ---
 # Insight MybatisPlus logic-delete
