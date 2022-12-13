@@ -46,7 +46,7 @@ categories: jekyll update
 >
 > 轻量是指不依赖应用服务器（Websphere、Jboss）。
 
-<img src="./images/TransactionsEssentials.png" alt="TransactionsEssentials" style="zoom:50%;" />
+<img src="{{ "/images/TransactionsEssentials.png" | prepend: site.baseurl }}" alt="TransactionsEssentials" style="zoom:50%;" />
 
 ### Insight atomikos 事务管理
 
