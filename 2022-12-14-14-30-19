@@ -1,0 +1,45 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------------------< cn.jdl:crm-common >--------------------------
+[INFO] Building crm-common 1.0.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.1.0:clean (default-clean) @ crm-common ---
+[INFO] Deleting C:\workspace\crm-common\target
+[INFO] 
+[INFO] --- maven-resources-plugin:3.1.0:resources (default-resources) @ crm-common ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory C:\workspace\crm-common\src\main\resources
+[INFO] skip non existing resourceDirectory C:\workspace\crm-common\src\main\resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ crm-common ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 449 source files to C:\workspace\crm-common\target\classes
+[INFO] /C:/workspace/crm-common/src/main/java/com/jd/spm/common/util/ExcelUtils.java: 某些输入文件使用或覆盖了已过时的 API。
+[INFO] /C:/workspace/crm-common/src/main/java/com/jd/spm/common/util/ExcelUtils.java: 有关详细信息, 请使用 -Xlint:deprecation 重新编译。
+[INFO] /C:/workspace/crm-common/src/main/java/com/jd/spm/common/bean/property/ReflectAsmPropOperation.java: 某些输入文件使用了未经检查或不安全的操作。
+[INFO] /C:/workspace/crm-common/src/main/java/com/jd/spm/common/bean/property/ReflectAsmPropOperation.java: 有关详细信息, 请使用 -Xlint:unchecked 重新编译。
+[INFO] 
+[INFO] --- maven-resources-plugin:3.1.0:testResources (default-testResources) @ crm-common ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory C:\workspace\crm-common\src\test\resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.1:testCompile (default-testCompile) @ crm-common ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 16 source files to C:\workspace\crm-common\target\test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ crm-common ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- maven-jar-plugin:3.1.2:jar (default-jar) @ crm-common ---
+[INFO] Building jar: C:\workspace\crm-common\target\crm-common-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- maven-install-plugin:2.5.2:install (default-install) @ crm-common ---
+[INFO] Installing C:\workspace\crm-common\target\crm-common-1.0.0-SNAPSHOT.jar to C:\repository\cn\jdl\crm-common\1.0.0-SNAPSHOT\crm-common-1.0.0-SNAPSHOT.jar
+[INFO] Installing C:\workspace\crm-common\pom.xml to C:\repository\cn\jdl\crm-common\1.0.0-SNAPSHOT\crm-common-1.0.0-SNAPSHOT.pom
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  53.878 s
+[INFO] Finished at: 2022-12-14T14:31:23+08:00
+[INFO] ------------------------------------------------------------------------
