@@ -1,0 +1,147 @@
+---
+layout: post
+title:  "Insight 数据库连接池 testOnBorrow 配置及设计分析"
+date:   2023-04-21 16:21:59 +0800
+categories: jekyll update
+---
+
+# Insight 数据库连接池 testOnBorrow 配置及设计
+
+> 记录 Commons DBCP testOnBorrow 的作用机制，从一点去分析数据库连接池获取的过程以及架构分层设计。
+> 
+> 笔记内容会按照每层的作用，贯穿分析整个调用流程。
+
+## commons-pool testOnBorrow
+
+> The indication of whether objects will be **validated before being borrowed** from the pool. 
+> 
+> If the object fails to validate, it will be dropped from the pool, and we will attempt to borrow another.
+> 
+> **testOnBorrow 不是 dbcp 定义的，是commons-pool 定义的**。commons-pool 详细的定义了资源池使用的一套规范和运行流程。
+
+```java
+/**
+ * Borrow an object from the pool. get object from 资源池
+ * @see org.apache.commons.pool2.impl.GenericObjectPool#borrowObject(long)
+ */
+public T borrowObject(final long borrowMaxWaitMillis) throws Exception {
+	
+	PooledObject<T> p = null;
+	
+    // if validation fails, the instance is destroyed and the next available instance is examined. 
+    // This continues until either a valid instance is returned or there are no more idle instances available.
+	while (p == null) {
+        // If there is one or more idle instance available in the pool, 
+        // then an idle instance will be selected based on the value of getLifo(), activated and returned.
+		p = idleObjects.pollFirst();
+		if (p != null) {
+            // 设置 testOnBorrow 就会进行可用性校验
+			if (p != null && (getTestOnBorrow() || create && getTestOnCreate())) {
+				boolean validate = false;
+				Throwable validationThrowable = null;
+				try {
+                    // 具体的校验实现由实现类完成。
+                    // see org.apache.commons.dbcp2.PoolableConnectionFactory
+					validate = factory.validateObject(p);
+				} catch (final Throwable t) {
+					PoolUtils.checkRethrow(t);
+					validationThrowable = t;
+				}
+				if (!validate) {
+					try {
+                        // 如果校验异常，会销毁该资源。
+                        // obj is not valid and should be dropped from the pool
+						destroy(p);
+						destroyedByBorrowValidationCount.incrementAndGet();
+					} catch (final Exception e) {
+						// Ignore - validation failure is more important
+					}
+					p = null;
+				}
+			}
+		}
+	}
+
+	return p.getObject();
+}
+```
+
+## commons-dbcp validateObject
+
+> dbcp 是特定于管理数据库连接的资源池。
+> 
+> **PoolableConnectionFactory** is a PooledObjectFactory
+> 
+> PoolableConnection is a PooledObject
+
+```java
+/**
+ * @see PoolableConnectionFactory#validateObject(PooledObject)
+ */
+@Override
+public boolean validateObject(final PooledObject<PoolableConnection> p) {
+	try {
+		/**
+		 * 检测资源池对象的创建时间，是否超过生存时间
+		 * 如果超过 maxConnLifetimeMillis, 不再委托数据库连接进行校验，直接废弃改资源
+		 * @see PoolableConnectionFactory#setMaxConnLifetimeMillis(long)
+		 */
+		validateLifetime(p);
+		// 委托数据库连接进行自我校验
+		validateConnection(p.getObject());
+		return true;
+	} catch (final Exception e) {
+		return false;
+	}
+}
+
+/**
+ * 数据库连接层的校验。具体到是否已关闭、是否与 server 连接可用
+ * @see Connection#isValid(int)
+ */
+public void validateConnection(final PoolableConnection conn) throws SQLException {
+	if(conn.isClosed()) {
+		throw new SQLException("validateConnection: connection closed");
+	}
+	conn.validate(_validationQuery, _validationQueryTimeout);
+}
+```
+
+
+
+## mysql-connector-java isValid
+
+> Returns true if the connection has not been closed and is still valid.
+> 
+> 这个是 java.sql.Connection 定义的规范。具体实现根据对应数据库的driver 来完成。使用某种机制用来探测连接是否可用。
+
+```java
+/**
+ * 调用 com.mysql.jdbc.MysqlIO， 发送ping 请求，检测是否可用
+ * 对比 H2 数据库，是通过获取当前事务级别来检测连接是否可以。但是忽略了 timeout 配置，毕竟是 demo 数据库
+ */
+public synchronized boolean isValid(int timeout) throws SQLException {
+	if (this.isClosed()) {
+		return false;
+	} else {
+		try {
+			this.pingInternal(false, timeout * 1000);
+			return true;
+		} catch (Throwable var5) {
+			return false;
+		}
+	}
+}
+```
+
+参考：[MySQL 的连接时长控制--interactive_timeout和wait_timeout_翔云123456的博客-CSDN博客](https://blog.csdn.net/lanyang123456/article/details/102535434)
+
+## 总结
+
+- commons-pool 定义资源的**完整声明周期接口**，包括：makeObject、activateObject、validateObject、passivateObject、destoryObject。资源池管理对象，通过实现这些接口即可实现资源控制。参考：org.apache.commons.pool2.PooledObjectFactory
+
+- 在校验过程中，牵涉到很多时间，包括资源池对象的创建时间、生存时间、数据库连接的超时时间、Mysql 连接空闲超时时间等。**不同层为了服务可靠性，提供不同的时间配置**。校验也是层层递进，最终委托到最底层来判断。
+
+- 校验过程中，对于连接也会由是否已关闭的校验（**isClosed()**）。包括PoolableConnection#isClosed, Connection#isClosed, Socket#isClosed。 同样也是层层保障，确保整个架构的可靠。
+
+- 定义一套完整严谨的规范和标准，比实现一个具体的功能或者特性要求更高。commons-pool 和 jdbc 定义了规范，commons-dbcp 和 mysql-connector-java 完成了具体的实现。有了规范和接口，组件和框架的对接和兼容才变为可能。
