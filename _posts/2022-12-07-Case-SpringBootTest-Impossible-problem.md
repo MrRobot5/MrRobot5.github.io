@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  "Case - SpringBootTest 使用过程中遇到的冷门问题"
+title:  "Case SpringBootTest 使用过程中遇到的冷门问题"
 date:   2022-12-07 16:20:44 +0800
 categories: jekyll update
 ---
-# Case - SpringBootTest 使用过程中遇到的冷门问题
+# Case SpringBootTest 使用过程中遇到的冷门问题
 
 ## 问题描述
 

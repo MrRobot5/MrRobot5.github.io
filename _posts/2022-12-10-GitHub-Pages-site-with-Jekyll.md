@@ -1,13 +1,13 @@
 ---
 
 layout: post
-title:  "笔记-Github Pages搭建个人主页"
+title:  "笔记 Github Pages搭建个人主页"
 date:   2022-12-10 00:35:46 +0800
 categories: jekyll update
 
 ---
 
-# 笔记-Github Pages搭建个人主页
+# 笔记 Github Pages搭建个人主页
 
 > 一切要从 Testing your GitHub Pages site locally with Jekyll 说起。跟着官方教程认真学习一番。
 > 

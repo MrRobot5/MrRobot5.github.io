@@ -1,11 +1,11 @@
 ---
 layout: post
-title:  "Java 服务CPU 使用率高排查思路"
+title:  "笔记 Java 服务CPU 使用率高排查思路"
 date:   2023-03-29 18:44:52 +0800
 categories: jekyll update
 ---
 
-# Java 服务CPU 使用率高排查思路
+# 笔记 Java 服务CPU 使用率高排查思路
 
 > CPU 使用高一般原因是出现代码死循环。
 > 
