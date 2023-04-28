@@ -40,19 +40,17 @@ categories: jekyll update
  * @see ParsingSQLRouter#route(String, List, SQLStatement) Join 查询实际涉及哪些表，就是在路由规则里匹配得出来的。
  */
 public boolean execute() throws SQLException {
-	try {
-		// 根据参数（决定分片）和具体的SQL 来匹配相关的实际 Table。
-		Collection<PreparedStatementUnit> preparedStatementUnits = route();
-		// 使用线程池，分发执行和结果归并。
-		return new PreparedStatementExecutor(getConnection().getShardingContext().getExecutorEngine(), routeResult.getSqlStatement().getType(), preparedStatementUnits).execute();
-	} finally {
-		JDBCShardingRefreshHandler.build(routeResult, connection).execute();
-		clearBatch();
-	}
+    try {
+        // 根据参数（决定分片）和具体的SQL 来匹配相关的实际 Table。
+        Collection<PreparedStatementUnit> preparedStatementUnits = route();
+        // 使用线程池，分发执行和结果归并。
+        return new PreparedStatementExecutor(getConnection().getShardingContext().getExecutorEngine(), routeResult.getSqlStatement().getType(), preparedStatementUnits).execute();
+    } finally {
+        JDBCShardingRefreshHandler.build(routeResult, connection).execute();
+        clearBatch();
+    }
 }
 ```
-
-
 
 ### SQL 路由策略
 
@@ -84,8 +82,6 @@ select * from order o inner join order_item oi on o.order_id = oi.order_id
 -- Actual SQL: db0 ::: select * from order_0 o inner join order_item_0 oi on o.order_id = oi.order_id
 ```
 
-
-
 ## Elasticsearch Join 查询场景
 
 > 首先，对于 NoSQL 数据库，要求 Join 查询，可以考虑是不是使用场景和用法有问题。
@@ -102,36 +98,55 @@ select * from order o inner join order_item oi on o.order_id = oi.order_id
 
 ### Code Insight
 
+源码地址：git@github.com:NLPchina/elasticsearch-sql.git
+
 ```java
 /**
  * Execute the ActionRequest and returns the REST response using the channel.
- * @see org.elasticsearch.plugin.nlpcn.executors.ElasticDefaultRestExecutor#execute
+ * @see ElasticDefaultRestExecutor#execute
+ * @see ESJoinQueryActionFactory#createJoinAction Join 算法选择
  */
 @Override
 public void execute(Client client, Map<String, String> params, QueryAction queryAction, RestChannel channel) throws Exception{
-	// sql parse
-	SqlElasticRequestBuilder requestBuilder = queryAction.explain();
-	
-	// join 查询
-	if(requestBuilder instanceof JoinRequestBuilder){
-		// join 算法选择。包括：HashJoinElasticExecutor、NestedLoopsElasticExecutor
-		ElasticJoinExecutor executor = ElasticJoinExecutor.createJoinExecutor(client,requestBuilder);
-		executor.run();
-		executor.sendResponse(channel);
-	}
-	// 其他类型查询 ...
+    // sql parse
+    SqlElasticRequestBuilder requestBuilder = queryAction.explain();
+
+    // join 查询
+    if(requestBuilder instanceof JoinRequestBuilder){
+        // join 算法选择。包括：HashJoinElasticExecutor、NestedLoopsElasticExecutor
+        // 如果关联条件为等值（Condition.OPEAR.EQ）,则使用 HashJoinElasticExecutor
+        ElasticJoinExecutor executor = ElasticJoinExecutor.createJoinExecutor(client,requestBuilder);
+        executor.run();
+        executor.sendResponse(channel);
+    }
+    // 其他类型查询 ...
 }
 ```
 
-### Join 算法
+## Join 算法
 
-参考 
+- 三种 Join 算法：Nested Loop Join，Hash Join、 Merge Join
+
+- MySQL 只支持 NLJ 或其变种，8.0.18 版本后支持 Hash Join
+
+- NLJ 相当于两个嵌套循环，用第一张表做 Outter Loop，第二张表做 Inner Loop，Outter Loop 的每一条记录跟 Inner Loop 的记录作比较，最终符合条件的就将该数据记录。
+
+- Hash Join 分为两个阶段; `build` 构建阶段和 `probe` 探测阶段。
+
+- 可以使用Explain 查看使用哪种 Join 算法。
+
+```sql
+EXPLAIN FORMAT=JSON  
+SELECT * FROM
+	sale_line_info u
+	JOIN sale_line_manager o ON u.sale_line_code = o.sale_line_code;
+```
+
+### 参考
 
 - [如何在分布式数据库中实现 **Hash Join**](https://zhuanlan.zhihu.com/p/35040231)
 
-- [**Nested Loop Join***](https://zhuanlan.zhihu.com/p/81398139)
-
-分别对应上述的两种算法实现。
+- [一文详解MySQL——Join的使用优化 - 掘金](https://juejin.cn/post/7224046762200154172)
 
 
 
@@ -141,14 +156,4 @@ public void execute(Client client, Map<String, String> params, QueryAction query
 
 对于中间件的优化更加有目的性，使用上会更加谨慎和小心。
 
-
-
-
-
-
-
-
-
-
-
-
+明确的筛选条件，更小的筛选范围，limit 取值数据，都可以减少计算陈本，提高性能。
