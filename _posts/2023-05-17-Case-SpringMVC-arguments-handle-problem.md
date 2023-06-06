@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Case SpringMVC 不同参数处理机制暴露的问题"
+title:  "Case SpringMVC 不同参数处理机制引发的问题"
 date:   2023-05-17 18:46:33 +0800
 categories: jekyll update
 ---
