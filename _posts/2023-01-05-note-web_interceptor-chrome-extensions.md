@@ -1,11 +1,12 @@
 ---
 layout: post
-title:  "笔记 web请求修改方案和chrome extensions"
+title:  "web 请求拦截方案和 chrome extensions"
 date:   2023-01-05 11:54:21 +0800
-categories: jekyll update
+categories: 学习笔记
+tags: chrome
 ---
-
-# 笔记 web请求拦截方案和Chrome extensions
+* content
+{:toc}
 
 ## 案例-浏览器请求增加自定义 Header
 

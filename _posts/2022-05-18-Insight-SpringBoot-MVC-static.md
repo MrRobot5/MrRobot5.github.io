@@ -1,10 +1,12 @@
 ---
 layout: post
-title:  "Insight SpringBoot MVC 静态资源配置"
+title:  "SpringBoot MVC 静态资源配置实现"
 date:   2022-05-18 17:16:33 +0800
-categories: jekyll update
+categories: 源码阅读
+tags: SpringBoot SpringMVC
 ---
-# Insight SpringBoot MVC 静态资源配置
+* content
+{:toc}
 
 > **SpringBoot 默认支持以下路径的文件作为 web 静态资源。**
 > 

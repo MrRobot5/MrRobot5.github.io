@@ -1,15 +1,17 @@
 ---
 layout: post
-title:  "Insight NoSuchMethodException-tk.mybatis集成Spring Boot 问题"
+title:  "NoSuchMethodException-tk.mybatis集成 SpringBoot 问题"
 date:   2019-08-08 22:01:46 +0800
-categories: jekyll update
+categories: 源码阅读
+tags: Mybatis SpringBoot
 ---
+* content
+{:toc}
 
-# Insight NoSuchMethodException-tk.mybatis集成Spring Boot 问题
 
-## 问题
+## 问题场景
 
-        在使用 tk.mybatis组件的过程中，调用 insertList()，报错如题。
+在使用 tk.mybatis组件的过程中，调用 insertList()，报错如题。
 
 表面意思是：没有找到 SpecialProvider 默认构造方法，SpecialProvider 实例化失败。
 

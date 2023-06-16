@@ -1,15 +1,16 @@
 ---
 
 layout: post
-title:  "Insight mysql driver zeroDateTimeBehavior"
+title:  "Mysql driver zeroDateTimeBehavior 实现原理"
 date:   2022-11-10 15:18:48 +0800
-categories: jekyll update
-
+categories: 源码阅读
+tags: Mysql
 ---
+* content
+{:toc}
 
-# Insight mysql driver zeroDateTimeBehavior
 
-## 使用mysql driver 遇到的问题
+## 使用 Mysql driver 遇到的问题
 
 ```log
 java.sql.SQLException: Value '0000-00-00 00:00:00' can not be represented as java.sql.Timestamp

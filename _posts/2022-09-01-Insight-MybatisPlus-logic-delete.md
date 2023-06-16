@@ -1,10 +1,12 @@
 ---
 layout: post
-title:  "Insight MybatisPlus logic-delete"
+title:  "MybatisPlus logic-delete 工作原理"
 date:   2022-09-01 10:19:58 +0800
-categories: jekyll update
+categories: 源码阅读
+tags: MybatisPlus
 ---
-# Insight MybatisPlus logic-delete
+* content
+{:toc}
 
 > 使用MybatisPlus 过程中，发现有逻辑删除的内置功能，比较好奇，引出此次的Code Insight。
 > 

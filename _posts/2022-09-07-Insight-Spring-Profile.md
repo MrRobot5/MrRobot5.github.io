@@ -1,13 +1,14 @@
 ---
 
 layout: post
-title:  "Insight Spring Profile及应用"
+title:  "Spring Profile 工作原理及应用"
 date:   2022-09-07 17:46:17 +0800
-categories: jekyll update
-
+categories: 源码阅读
+tags: Spring
 ---
+* content
+{:toc}
 
-# Insight Spring profile及应用
 
 > 监控、动态配置等辅助功能，在开发和测试场景中，并不需要。但是会在spring 启动加载过程中拖慢启动速度，开发、自测效率也受影响。
 > 

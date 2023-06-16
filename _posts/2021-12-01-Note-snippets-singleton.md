@@ -1,13 +1,13 @@
 ---
 
 layout: post
-title:  "笔记 snippets-单例写法"
+title:  "snippets-单例写法 🙉"
 date:   2021-12-01 18:11:29 +0800
-categories: jekyll update
-
+categories: 学习笔记
+tags: Spring
 ---
-
-# 笔记 snippets-单例写法
+* content
+{:toc}
 
 ## 常用写法 double check
 

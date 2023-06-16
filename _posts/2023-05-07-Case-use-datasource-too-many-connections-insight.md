@@ -1,11 +1,12 @@
 ---
 layout: post
-title:  "Case 使用数据库连接池场景下的 too many connections 问题记录"
+title:  "使用数据库连接池场景下的 too many connections 问题排查"
 date:   2023-05-07 17:25:01 +0800
-categories: jekyll update
+categories: 实战问题
+tags: DataSource 问题分析
 ---
-
-# Case 使用数据库连接池场景下的 too many connections 问题记录
+* content
+{:toc}
 
 > 在应用工程里，存在一个后台执行 SQL 脚本的接口。在大量的使用后，提示异常：`Could not create connection to database server. Attempted reconnect 3 times. Giving up.` 同时，其他连接这个 mysql 的应用，也提示异常。
 > 

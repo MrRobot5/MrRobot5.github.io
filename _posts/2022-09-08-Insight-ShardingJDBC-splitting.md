@@ -1,10 +1,12 @@
 ---
 layout: post
-title:  "Insight ShardingJDBC 读写分离路由机制"
+title:  "ShardingJDBC 读写分离路由机制实现原理"
 date:   2022-09-08 18:11:28 +0800
-categories: jekyll update
+categories: 源码阅读
+tags: ShardingJDBC
 ---
-# Insight ShardingJDBC 读写分离路由机制
+* content
+{:toc}
 
 > ShardingSphere-JDBC 支持分库分表和读写分离。
 > 

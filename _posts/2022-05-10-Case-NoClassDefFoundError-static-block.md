@@ -1,10 +1,12 @@
 ---
 layout: post
-title:  "Case NoClassDefFoundError案例-static 代码块"
+title:  "NoClassDefFoundError 案例分析-static 代码块"
 date:   2022-05-10 15:22:06 +0800
-categories: jekyll update
+categories: 实战问题
+tags: JVM
 ---
-# NoClassDefFoundError案例-static 代码块
+* content
+{:toc}
 
 ## 问题背景
 

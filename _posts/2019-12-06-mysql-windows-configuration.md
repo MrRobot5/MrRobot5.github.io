@@ -2,9 +2,11 @@
 layout: post
 title:  "mysql windows 服务配置"
 date:   2019-12-06 17:37:49 +0800
-categories: jekyll update
+categories: 学习笔记
+tags: Mysql
 ---
-## mysql windows 服务配置
+* content
+{:toc}
 
 ### 删除旧服务
 

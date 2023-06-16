@@ -1,13 +1,15 @@
 ---
 
 layout: post
-title:  "Insight Mybatis 日志（动态代理Example）"
+title:  "Mybatis 日志（动态代理Example）案例分析"
 date:   2020-09-18 18:06:18 +0800
-categories: jekyll update
+categories: 源码阅读
+tags: Mybatis
 
 ---
+* content
+{:toc}
 
-# Insight Mybatis 日志（动态代理Example）
 
 ## 日志打印引发的疑问
 

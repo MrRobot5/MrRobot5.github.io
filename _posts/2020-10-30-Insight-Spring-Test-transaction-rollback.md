@@ -1,13 +1,15 @@
 ---
 
 layout: post
-title:  "Insight Spring Test事务自动回滚的实现"
+title:  "Spring Test事务自动回滚实现原理"
 date:   2020-10-30 11:34:21 +0800
-categories: jekyll update
+categories: 源码阅读
+tags: Mybatis Spring 事务控制
 
 ---
+* content
+{:toc}
 
-# Insight Spring Test 事务自动回滚的实现
 
 ## 测试环境事务控制的意义
 

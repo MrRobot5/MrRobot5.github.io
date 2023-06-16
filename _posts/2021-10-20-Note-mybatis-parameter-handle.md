@@ -1,13 +1,14 @@
 ---
 
 layout: post
-title:  "笔记 mybatis 参数封装和处理相关方法"
+title:  "mybatis 参数封装和处理相关方法梳理"
 date:   2021-10-20 17:52:14 +0800
-categories: jekyll update
-
+categories: 学习笔记
+tags: Mybatis
 ---
+* content
+{:toc}
 
-# 笔记 mybatis 参数封装和处理相关方法
 
 > 清单目的：在使用到mybatis 冷门特性时候，可以快速参考查阅
 

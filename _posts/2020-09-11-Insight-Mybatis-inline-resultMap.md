@@ -1,13 +1,15 @@
 ---
 
 layout: post
-title:  "Insight Mybatis 内嵌resultMap工作原理"
+title:  "Mybatis 内嵌 resultMap 工作原理"
 date:   2020-09-11 18:46:39 +0800
-categories: jekyll update
+categories: 源码阅读
+tags: Mybatis
 
 ---
+* content
+{:toc}
 
-# Insight Mybatis 内嵌resultMap工作原理
 
 ## 疑问
 

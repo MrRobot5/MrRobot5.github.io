@@ -1,15 +1,14 @@
 ---
-
 layout: post
 title:  "漫游 Redis SORTGET combination"
 date:   2021-07-30 17:39:42 +0800
-categories: jekyll update
-
+categories: 学习笔记
+tags: Redis
 ---
+* content
+{:toc}
 
-# 漫游 Redis *SORT/GET* combination
-
-## 缘起
+## 起因
 
 阅读Retwis-J（Redis版本的Twitter ）设计文档过程中，对于Redis join 方案的实现比较感兴趣，因此记录下SORT/GET 的神奇用法。以备不时之需。
 

@@ -1,10 +1,12 @@
 ---
 layout: post
-title:  "笔记-Mybatis Interceptor"
+title:  "Mybatis Interceptor 开发相关知识梳理"
 date:   2022-09-26 21:45:17 +0800
-categories: jekyll update
+categories: 学习笔记
+tags: Mybatis
 ---
-# 笔记-Mybatis Interceptor
+* content
+{:toc}
 
 ## How to use
 

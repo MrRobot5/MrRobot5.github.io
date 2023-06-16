@@ -1,10 +1,13 @@
 ---
 layout: post
-title:  "Insight HandlerInterceptor 与@ExceptionHandler 的顺序"
+title:  "SpringMVC HandlerInterceptor 与@ExceptionHandler 的顺序"
 date:   2019-12-20 14:54:42 +0800
-categories: jekyll update
+categories: 源码阅读
+tags: SpringMVC
+
 ---
-# Insight HandlerInterceptor 与@ExceptionHandler 的顺序
+* content
+{:toc}
 
 > 项目中HandlerInterceptor preHandle方法会把登录的用户信息存储在ThreadLocal，方便请求逻辑中获取，
 > 

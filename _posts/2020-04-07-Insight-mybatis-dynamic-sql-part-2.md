@@ -1,19 +1,16 @@
 ---
 
 layout: post
-title:  "Case mybatis 动态sql解析-使用问题"
+title:  "mybatis 动态sql解析-使用问题分析"
 date:   2020-04-07 21:12:24 +0800
-categories: jekyll update
+categories: 实战问题
+tags: Mybatis
 
 ---
-
-# Case mybatis 动态sql解析-使用问题
 
 > part1 主要分析动态sql 参数相关的解析，对于xml-> sql 的过程没有详细分析，此文补上。[part1 GO.](https://blog.csdn.net/tt50335971/article/details/72484023)
 > 
 > 问题：工作中遇到的一个bug，mybatis 查询有个参数为0，导致拼接的sql异常。
-
-
 
 ## 问题
 
@@ -61,4 +58,4 @@ public boolean evaluateBoolean(String expression, Object parameterObject) {
 * mybatis 利用OGNL生成动态sql
 * OGNL 对于表达式的解析约定和实现，决定了上述问题的出现
 * 代码不能直接copy，要多测试
-* 入参传0，也有些另类！！！
+* 入参传0，实际开发中尽量不要使用。 JavaScript 也存在传参为 0 识别为false 的问题。❌

@@ -1,12 +1,14 @@
 ---
 layout: post
-title:  "Case NoClassDefFoundError 案例-Spring MVC 扫描Controller"
+title:  "NoClassDefFoundError 案例分析-SpringMVC 扫描 Controller"
 date:   2022-05-10 16:57:19 +0800
-categories: jekyll update
+categories: 实战问题
+tags: JVM SpringMVC
 ---
-# NoClassDefFoundError 案例-Spring MVC 扫描Controller
+* content
+{:toc}
 
-## 错误信息
+## 问题场景
 
 > org.springframework.beans.factory.BeanCreationException: 
 > 

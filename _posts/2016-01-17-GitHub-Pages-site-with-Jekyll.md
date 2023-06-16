@@ -1,11 +1,13 @@
 ---
 
 layout: post
-title:  "笔记 Github Pages搭建个人主页"
-date:   2022-12-10 00:35:46 +0800
-categories: jekyll update
-
+title:  "笔记 Github Pages 搭建个人主页"
+date:   2016-01-17 00:35:46 +0800
+categories: 学习笔记
+tags: Jekyll
 ---
+* content
+{:toc}
 
 # 笔记 Github Pages搭建个人主页
 

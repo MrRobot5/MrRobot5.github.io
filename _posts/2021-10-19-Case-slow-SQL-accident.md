@@ -1,13 +1,15 @@
 ---
 
 layout: post
-title:  "Case 因为慢SQL导致的线上服务不可用"
+title:  "因为慢 SQL 导致的线上服务不可用案例分析"
 date:   2021-10-19 21:34:11 +0800
-categories: jekyll update
-
+categories: 实战问题
+tags: Mysql
 ---
+* content
+{:toc}
 
-# Case 因为慢SQL导致的线上服务不可用
+## 问题场景
 
 > 记一次线上事故排查过程，事故的根本原因是慢SQL 查询。但线上问题的情况以及监控工具指标表现，并没有直接指向慢SQL 的问题，排查的过程值得记录和反思。
 
@@ -17,7 +19,7 @@ categories: jekyll update
 
 ## 初步问题排查分析
 
-首先，第一反应应该是web-server出问题或者mysql-server 出问题。比如CPU打满或者内存打满，导致的服务不可用。
+首先，第一反应应该是 web-server 出问题或者 mysql-server 出问题。比如CPU打满或者内存打满，导致的服务不可用。
 
 通过监控工具查看应用服务器的指标、JVM指标以及数据库服务器CPU、磁盘的指标，都处于正常范围。
 

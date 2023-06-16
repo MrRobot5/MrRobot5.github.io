@@ -1,10 +1,15 @@
 ---
 layout: post
-title:  "Insight Spring 循环依赖及解决方案"
+title:  "Spring 循环依赖及解决方案"
 date:   2020-08-12 16:48:47 +0800
-categories: jekyll update
+categories: 源码阅读
+tags: Spring
+
 ---
-## Insight Spring 循环依赖及解决方案
+* content
+{:toc}
+
+## 问题场景
 
 > 遇到的问题：项目中需要用到策略模式，把策略实现以集合的形式注入到Service 中。因为要强制校验策略的顺序，所以采用的是构造器注入，简单明了。结果Spring 启动失败，`Is there an unresolvable circular reference?`。
 

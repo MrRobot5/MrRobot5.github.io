@@ -1,10 +1,12 @@
 ---
 layout: post
-title:  "SpringBoot Test bean 使用 NPE 诡异问题"
+title:  "SpringBoot Test bean NPE 问题排查"
 date:   2022-07-13 17:57:33 +0800
-categories: jekyll update
+categories: 实战问题
+tags: SpringBoot
 ---
-# SpringBoot Test NPE 诡异问题引发的cglib 机制探索
+* content
+{:toc}
 
 > 近期，在使用SpringBoot Test 单测验证service 逻辑过程中，发现service “注入”的mapper 竟然是null, 导致业务方法NPE。
 > 

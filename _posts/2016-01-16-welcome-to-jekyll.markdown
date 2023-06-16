@@ -1,11 +1,12 @@
 ---
-
 layout: post
 title:  "Welcome to Jekyll!"
 date:   2016-01-16 18:18:44 +0800
-categories: jekyll update
-
+categories: 学习笔记
+tags: Jekyll
 ---
+* content
+{:toc}
 
 You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 

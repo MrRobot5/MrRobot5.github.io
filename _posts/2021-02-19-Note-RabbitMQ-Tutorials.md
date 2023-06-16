@@ -1,10 +1,13 @@
 ---
 layout: post
-title:  "笔记 RabbitMQ Tutorials 场景学习"
+title:  "RabbitMQ Tutorials 场景学习笔记"
 date:   2021-02-19 17:32:46 +0800
-categories: jekyll update
+categories: 学习笔记
+tags: RabbitMQ
 ---
-# RabbitMQ Tutorials 场景学习
+* content
+{:toc}
+# RabbitMQ Tutorials 场景案例
 
 https://www.rabbitmq.com/getstarted.html
 

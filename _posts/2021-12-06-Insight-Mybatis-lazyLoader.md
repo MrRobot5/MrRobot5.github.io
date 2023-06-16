@@ -1,10 +1,12 @@
 ---
 layout: post
-title:  "Insight Mybatis 内嵌查询以及lazyLoader工作原理"
+title:  "Mybatis 内嵌查询以及 lazyLoader 工作原理"
 date:   2021-12-06 15:46:50 +0800
-categories: jekyll update
+categories: 源码阅读
+tags: Mybatis
 ---
-# Insight Mybatis 内嵌查询以及lazyLoader工作原理
+* content
+{:toc}
 
 ## Mybatis内嵌查询示例
 

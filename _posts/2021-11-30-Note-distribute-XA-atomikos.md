@@ -1,12 +1,12 @@
 ---
 layout: post
-title:  "笔记 分布式事务-XA模式与atomikos框架浅析"
+title:  "分布式事务- XA 模式与 atomikos 框架浅析"
 date:   2021-11-30 17:58:34 +0800
-categories: jekyll update
+categories: 学习笔记
+tags: Spring 事务控制
 ---
-# 笔记 分布式事务-XA模式与atomikos框架浅析
-
-
+* content
+{:toc}
 
 > 最近在看 H2 数据库的实现原理，竟然支持 XA 协议。正好顺路对分布式事务温习下，感觉无用的知识又增加了。
 >

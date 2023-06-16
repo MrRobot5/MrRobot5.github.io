@@ -3,11 +3,12 @@
 layout: post
 title:  "笔记 Java 值传递以及相关的知识点"
 date:   2021-12-30 10:15:23 +0800
-categories: jekyll update
-
+categories: 学习笔记
+tags: JVM
 ---
+* content
+{:toc}
 
-# 笔记 Java 值传递以及相关的知识点
 
 ## Java 值传递典型例子
 

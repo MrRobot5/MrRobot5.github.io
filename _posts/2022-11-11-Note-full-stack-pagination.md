@@ -1,12 +1,14 @@
 ---
 layout: post
-title:  "笔记 前后端列表分页 pagination 知识点"
+title:  "前后端列表分页 pagination 相关知识点"
 date:   2022-11-11 17:45:57 +0800
-categories: jekyll update
+categories: 学习笔记
+tags: 全栈
 ---
-# 笔记 前后端列表分页 pagination 知识点
+* content
+{:toc}
 
-> 分页是 web application 开发最常见的功能。在使用不同的框架和工具过程中，发现初始行/页的定义不同，特意整理记录。
+分页是 web application 开发最常见的功能。在使用不同的框架和工具过程中，发现初始行/页的定义不同，特意整理记录。
 
 ## 数据库分页
 

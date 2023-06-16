@@ -1,10 +1,12 @@
 ---
 layout: post
-title:  "Insight Spring Boot booting 原理(EnableAutoConfiguration)"
+title:  "SpringBoot booting 原理(EnableAutoConfiguration)"
 date:   2021-04-23 17:22:03 +0800
-categories: jekyll update
+categories: 学习笔记
+tags: SpringBoot
 ---
-# Insight Spring Boot booting 原理(EnableAutoConfiguration)
+* content
+{:toc}
 
 > springboot boot spring 的方案除了前一篇文章提到的，通过 SpringApplicationRunListener 暴露spring 框架启动的阶段，为spring 容器的初始化各种事件的扩展提供方案。
 > 

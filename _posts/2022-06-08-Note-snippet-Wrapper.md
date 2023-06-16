@@ -1,10 +1,12 @@
 ---
 layout: post
-title:  "笔记 - 包装模式（Wrapper）案例"
+title:  "包装模式（Wrapper）使用案例"
 date:   2022-06-08 11:45:42 +0800
-categories: jekyll update
+categories: 学习笔记
+tags: 设计模式 Spring
 ---
-# 笔记 - 包装模式（Wrapper）案例
+* content
+{:toc}
 
 > 最近读源码，发现包装模式的写法案例。虽然不是严格的包装设计模式，但是能达到封装和适配的效果，简化使用方式和功能扩展。
 > 
@@ -12,7 +14,7 @@ categories: jekyll update
 
 ## 案例-MimeMessageHelper
 
-> 在Spring 封装javamail 的实现中，有个MimeMessageHelper 类。
+> 在 Spring 封装javamail 的实现中，有个MimeMessageHelper 类。
 > 
 > 通过包装MimeMessage 对象，提供简便的操作API。同时，镜像操作MimeMessage对象，对MimeMessage 直接赋值的操作。
 

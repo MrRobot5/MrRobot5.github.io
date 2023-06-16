@@ -1,11 +1,12 @@
 ---
 layout: post
-title:  "笔记 Jquery ajax 相关配置和请求处理"
+title:  "Jquery ajax 相关配置和请求处理"
 date:   2023-04-25 11:10:16 +0800
-categories: jekyll update
+categories: 学习笔记
+tags: Jquery ajax
 ---
-
-# 笔记 Jquery ajax 相关配置和请求处理
+* content
+{:toc}
 
 ## 使用示例
 

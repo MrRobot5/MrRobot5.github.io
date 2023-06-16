@@ -1,11 +1,13 @@
 ---
 layout: post
-title:  "笔记 Communication In Lettuce(netty 编程Example)"
+title:  "Communication In Lettuce(netty 编程 Example)"
 date:   2018-04-12 17:11:06 +0800
-categories: jekyll update
+categories: 学习笔记
+tags: netty Redis IO
 ---
+* content
+{:toc}
 
-# 笔记 Communication In Lettuce(netty 编程Example)
 
 ## Lettuce
 

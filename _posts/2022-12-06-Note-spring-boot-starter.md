@@ -1,10 +1,12 @@
 ---
 layout: post
-title:  "笔记 spring boot starter 知识梳理"
+title:  "spring boot starter 开发知识梳理"
 date:   2022-12-06 18:24:56 +0800
-categories: jekyll update
+categories: 学习笔记
+tags: SpringBoot
 ---
-# 笔记 spring boot starter 知识梳理
+* content
+{:toc}
 
 ## 示例
 

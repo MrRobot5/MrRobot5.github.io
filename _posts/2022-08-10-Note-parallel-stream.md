@@ -1,10 +1,12 @@
 ---
 layout: post
-title:  "笔记-parallel stream 实现原理"
+title:  "parallel stream 实现原理"
 date:   2022-08-10 17:52:11 +0800
-categories: jekyll update
+categories: 学习笔记
+tags: 并发编程
 ---
-# 笔记-parallel stream 实现原理
+* content
+{:toc}
 
 ## Stream 基础概念
 

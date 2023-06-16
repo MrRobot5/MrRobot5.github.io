@@ -1,15 +1,15 @@
 ---
 
 layout: post
-title:  "笔记 Spring 容器核心类 DefaultListableBeanFactory"
+title:  "Spring 容器核心类 DefaultListableBeanFactory 知识点梳理"
 date:   2019-12-13 11:50:45 +0800
-categories: jekyll update
-
+categories: 学习笔记
+tags: Spring
 ---
+* content
+{:toc}
 
-# Spring 容器核心类 DefaultListableBeanFactory
-
-> Spring 容器默认的实现类。在遇到Spring bean 相关问题，都会涉及到 `DefaultListableBeanFactory`，因此列出常用的元素，方便知识梳理和 问题定位。
+Spring 容器默认的实现类。在遇到Spring bean 相关问题，都会涉及到 `DefaultListableBeanFactory`，因此列出常用的元素，方便知识梳理和 问题定位。
 
 ## 关键接口和类
 

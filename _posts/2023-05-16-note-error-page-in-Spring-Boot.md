@@ -1,11 +1,12 @@
 ---
 layout: post
-title:  "笔记 error-page in Spring Boot"
+title:  "error-page in Spring Boot"
 date:   2023-05-16 18:03:01 +0800
-categories: jekyll update
+categories: 学习笔记
+tags: SpringBoot Servlet
 ---
-
-# 笔记 error-page in Spring Boot
+* content
+{:toc}
 
 ## Java Web 配置 error-page
 

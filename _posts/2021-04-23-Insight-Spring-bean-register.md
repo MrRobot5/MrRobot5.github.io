@@ -1,13 +1,13 @@
 ---
 
 layout: post
-title:  "Insight Spring重复Bean 注册的过程"
+title:  "Insight Spring 重复 Bean 注册的过程"
 date:   2021-04-23 18:18:12 +0800
-categories: jekyll update
-
+categories: 源码阅读
+tags: Spring
 ---
-
-# Insight Spring重复Bean 注册的过程
+* content
+{:toc}
 
 > 疑问：在业务工程代码梳理过程中，发现竟然存在xml 和 注解两种方式配置相同beanName，但是不同的Class。竟然能正常启动发布。理论上beanName 是唯一的，是怎么回事。
 > 

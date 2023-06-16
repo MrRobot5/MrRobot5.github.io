@@ -1,13 +1,14 @@
 ---
 
 layout: post
-title:  "Insight Mybatis JdbcTemplate 混合事务控制的实现"
+title:  "Mybatis JdbcTemplate 混合事务控制的实现"
 date:   2020-11-24 21:45:24 +0800
-categories: jekyll update
-
+categories: 源码阅读
+tags: Mybatis Spring 事务控制
 ---
+* content
+{:toc}
 
-# Insight Mybatis JdbcTemplate 混合事务控制的实现
 
 ## 混合使用的背景
 

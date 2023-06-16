@@ -1,10 +1,14 @@
 ---
 layout: post
-title:  "Case - Mysql TRANSACTION DEADLOCK"
+title:  "Mysql TRANSACTION DEADLOCK 案例分析"
 date:   2022-06-10 17:11:10 +0800
-categories: jekyll update
+categories: 实战问题
+tags: Mysql 并发编程
 ---
-# Case - Mysql TRANSACTION DEADLOCK
+* content
+{:toc}
+
+## 问题场景 - Mysql TRANSACTION DEADLOCK
 
 > 一次上线完成后，观察线上日志，发现很多死锁异常（org.springframework.dao.DeadlockLoserDataAccessException）。
 > 

@@ -2,9 +2,11 @@
 layout: post
 title:  "笔记 Mysql for update 分析及应用"
 date:   2022-09-02 16:24:05 +0800
-categories: jekyll update
+categories: 学习笔记
+tags: Mysql 并发编程
 ---
-# 笔记 MySQL for update 分析及应用
+* content
+{:toc}
 
 > for update 应用场景：对需要读写操作（**query data** and **then insert or update** related data within the same transaction）的数据进行加锁，防止其他写操作的影响。把业务并发彻底变为串行。业务操作变安全。
 

@@ -1,12 +1,12 @@
 ---
 layout: post
-title:  "Insight h2database 专辑⭐⭐⭐"
+title:  "h2database 架构分析"
 date:   2022-09-02 18:17:54 +0800
-categories: jekyll update2
-
+categories: 学习笔记
+tags: h2数据库 架构设计
 ---
-
-# Insight h2database 专辑
+* content
+{:toc}
 
 > 本文作为 Code Insight 目录，梳理 h2 数据库的知识点以及感兴趣的实现细节。
 > 

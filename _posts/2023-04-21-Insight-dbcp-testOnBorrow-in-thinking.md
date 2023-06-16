@@ -1,11 +1,12 @@
 ---
 layout: post
-title:  "Insight 数据库连接池 testOnBorrow 配置及设计分析"
+title:  "数据库连接池 testOnBorrow 配置及设计分析"
 date:   2023-04-21 16:21:59 +0800
-categories: jekyll update
+categories: 源码阅读
+tags: DataSource 架构设计
 ---
-
-# Insight 数据库连接池 testOnBorrow 配置及设计
+* content
+{:toc}
 
 > 记录 Commons DBCP testOnBorrow 的作用机制，从一点去分析数据库连接池获取的过程以及架构分层设计。
 > 

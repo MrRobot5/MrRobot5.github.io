@@ -1,10 +1,12 @@
 ---
 layout: post
-title:  "笔记 ThreadLocal 应用 - MDC"
+title:  "ThreadLocal 应用场景分析 - MDC"
 date:   2022-09-19 10:54:07 +0800
-categories: jekyll update
+categories: 学习笔记
+tags: MDC ThreadLocal
 ---
-# 笔记 ThreadLocal 应用 - MDC
+* content
+{:toc}
 
 ## Mapped Diagnostic Contexts (MDC)
 

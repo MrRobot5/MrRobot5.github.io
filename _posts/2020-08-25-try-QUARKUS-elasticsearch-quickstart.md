@@ -2,9 +2,13 @@
 layout: post
 title:  "尝试 QUARKUS - elasticsearch-quickstart"
 date:   2020-08-25 16:36:03 +0800
-categories: jekyll update
+categories: 学习笔记
+tags: 架构设计
+
 ---
-## 尝试 QUARKUS - elasticsearch-quickstart
+* content
+{:toc}
+### QUARKUS - elasticsearch-quickstart
 
 > QUARKUS 框架, 用于构建云原生的应用。大体类似Spring 的Java框架，又不同常规的Java 框架，提供Native 、Reactive特性。除了提供一揽子的应用开发解决方案，更大的突破在于编译后轻量应用、高性能应用，RedHat出品。
 >

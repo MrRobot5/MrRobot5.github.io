@@ -1,12 +1,12 @@
 ---
 layout: post
-title:  "Insight Jedis 和 RESP协议解析（通信协议实现 Example）"
+title:  "Jedis 和 RESP 协议解析（通信协议实现 Example）"
 date:   2017-11-04 10:58:52 +0800
-categories: jekyll update
-
+categories: 学习笔记
+tags: Redis IO
 ---
-
-# Insight Jedis 和 RESP协议解析（通信协议实现 Example）
+* content
+{:toc}
 
 ## RESP协议
 

@@ -1,11 +1,12 @@
 ---
 layout: post
-title:  "Case SpringMVC 不同参数处理机制引发的问题"
+title:  "SpringMVC 不同参数处理机制引发的问题案例分析"
 date:   2023-05-17 18:46:33 +0800
-categories: jekyll update
+categories: 实战问题
+tags: SpringMVC 问题分析
 ---
-
-# Case SpringMVC 不同参数处理机制引发的问题
+* content
+{:toc}
 
 > 这个问题非常有趣，不是SpringMVC 的问题，是使用了两种请求方式暴露出来的。
 

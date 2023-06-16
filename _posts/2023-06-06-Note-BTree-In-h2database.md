@@ -1,11 +1,12 @@
 ---
 layout: post
-title:  "Note BTree In h2database"
+title:  "h2database BTree 设计实现与查询优化思考"
 date:   2023-06-06 18:03:25 +0800
-categories: jekyll update
+categories: 学习笔记 算法
+tags: h2数据库
 ---
-
-# 笔记 h2database BTree 设计实现与查询优化思考
+* content
+{:toc}
 
 > h2database 是使用Java 编写的开源数据库，兼容ANSI-SQL89。
 > 

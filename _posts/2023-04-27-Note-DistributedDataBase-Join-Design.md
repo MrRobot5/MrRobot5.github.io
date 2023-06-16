@@ -1,11 +1,12 @@
 ---
 layout: post
-title:  "笔记 分布式数据库 Join 查询思路"
+title:  "分布式数据库 Join 查询方案"
 date:   2023-04-27 20:49:40 +0800
-categories: jekyll update
+categories: 学习笔记
+tags: Elasticsearch Mysql 
 ---
-
-# 笔记 分布式数据库 Join 查询思路
+* content
+{:toc}
 
 > 相对于单例数据库的查询操作，分布式数据查询会有很多技术难题。
 > 

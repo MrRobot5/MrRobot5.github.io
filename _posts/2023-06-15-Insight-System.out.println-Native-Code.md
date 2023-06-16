@@ -1,15 +1,15 @@
 ---
 layout: post
-title:  "Insight System"
+title:  "Insight System.out.println() 控制台打印实现"
 date:   2023-06-15 20:58:03 +0800
-categories: jekyll update
+categories: 源码阅读
+tags: native Windows gcc
 ---
+* content
+{:toc}
 
-# Insight System.out.println() 控制台打印实现
-
-> 最近看到一个开源项目/公开课 [CS5411/4411 at Cornell](https://www.cs.cornell.edu/courses/cs4411/2022fa/schedule/)，关于如何实现一个操作系统。突然对 Java 中native 调用比较感兴趣。
-> 
-> 特意选择 System.out.println() 与操作系统的交互来了解OS System Call 实现过程。
+最近看到一个开源项目/公开课 [CS5411/4411 at Cornell](https://www.cs.cornell.edu/courses/cs4411/2022fa/schedule/)，关于如何实现一个操作系统。突然对 Java 中native 调用比较感兴趣。
+特意选择 System.out.println() 与操作系统的交互来了解OS System Call 实现过程。
 
 ## System.out 初始化
 

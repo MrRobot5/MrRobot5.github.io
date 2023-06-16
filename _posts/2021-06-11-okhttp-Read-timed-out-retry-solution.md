@@ -1,17 +1,18 @@
 ---
 
 layout: post
-title:  "笔记 okhttp Read timed out 重试方案解疑"
+title:  "okhttp Read timed out 重试方案解疑"
 date:   2021-06-11 15:59:56 +0800
-categories: jekyll update
-
+categories: 学习笔记
+tags: okhttp
 ---
+* content
+{:toc}
 
-# 笔记 okhttp Read timed out 重试方案解疑
 
 ## 疑问
 
-使用okhttp 抓取数据场景中，偶发Read timed out异常。正常的做法是增加重试机制。
+使用 okhttp 抓取数据场景中，偶发Read timed out异常。正常的做法是增加重试机制。
 
 在查看文档过程中，发现okhttp 默认会注册`RetryAndFollowUpInterceptor ，字面上是支持重试的`。
 

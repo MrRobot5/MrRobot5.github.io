@@ -1,10 +1,12 @@
 ---
 layout: post
-title:  "笔记 Spring Boot DataSource 知识梳理"
+title:  "Spring Boot DataSource 知识梳理"
 date:   2022-12-07 15:56:11 +0800
-categories: jekyll update
+categories: 学习笔记
+tags: SpringBoot DataSource
 ---
-# 笔记 Spring Boot DataSource 知识梳理
+* content
+{:toc}
 
 > 梳理 Spring Boot 默认配置的数据库和连接池，以及自定义配置的方法
 

@@ -1,12 +1,14 @@
 ---
 layout: post
-title:  "Insight Spring @Value 默认值配置解析实现"
+title:  "Spring @Value 默认值配置解析实现"
 date:   2020-03-06 18:17:43 +0800
-categories: jekyll update
+categories: 源码阅读
+tags: Spring
 ---
-# Insight Spring @Value 默认值配置解析实现
+* content
+{:toc}
 
-## 背景
+## 起因
 
 最近接手的项目，配置项实在是多。主要使用Spring @Value 注入，很多是固化下来的配置，但也不能彻底写死，以备临时调整。
 
@@ -23,7 +25,6 @@ org.springframework.beans.factory.support.DefaultListableBeanFactory#doResolveDe
 org.springframework.util.PropertyPlaceholderHelper#parseStringValue
 
 [Insight spring @Value 注入处理](https://blog.csdn.net/tt50335971/article/details/52599760)
-
 
 
 ## 解析实现

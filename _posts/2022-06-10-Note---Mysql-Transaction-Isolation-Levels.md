@@ -1,10 +1,12 @@
 ---
 layout: post
-title:  "笔记 - Mysql Transaction Isolation Levels 案例"
+title:  "Mysql Transaction Isolation Levels 案例"
 date:   2022-06-10 15:51:32 +0800
-categories: jekyll update
+categories: 学习笔记
+tags: Mysql 并发编程
 ---
-# 笔记 - Mysql Transaction Isolation Levels 案例
+* content
+{:toc}
 
 > 使用Mysql 客户端，通过两个客户端执行SQL 来模拟并发。
 

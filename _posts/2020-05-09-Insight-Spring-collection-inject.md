@@ -1,10 +1,13 @@
 ---
 layout: post
-title:  "Insight Spring 泛集合注入以及应用"
+title:  "Spring 泛集合注入以及应用"
 date:   2020-05-09 18:01:05 +0800
-categories: jekyll update
+categories: 源码阅读
+tags: Spring
+
 ---
-# Insight Spring 泛集合注入以及应用
+* content
+{:toc}
 
 > 本文关注 Spring 注入泛集合的调用链，以及注入集合的排序问题和应用。
 >

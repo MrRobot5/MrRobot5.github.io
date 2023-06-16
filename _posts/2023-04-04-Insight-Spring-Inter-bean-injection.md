@@ -1,11 +1,13 @@
 ---
 layout: post
-title:  "Insight Spring Inter-bean injection"
+title:  "Spring Inter-bean injection 实现原理"
 date:   2023-04-04 10:50:53 +0800
-categories: jekyll update
+categories: 源码阅读
+tags: Spring
 ---
+* content
+{:toc}
 
-# Insight Spring Inter-bean injection
 
 > Spring 基于 Java 配置方式，在Bean 有依赖配置的情况下，可以直接写成方法调用。框架背后的原理（magic🎭）是怎样的？
 > 

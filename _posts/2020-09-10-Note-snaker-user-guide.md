@@ -1,13 +1,14 @@
 ---
 
 layout: post
-title:  "笔记 snaker 使用指导和设计浅析"
+title:  "snaker 使用指导和设计浅析"
 date:   2020-09-10 18:31:01 +0800
-categories: jekyll update
+categories: 源码阅读
+tags: 架构设计
 
 ---
-
-# snaker 使用指导和设计浅析
+* content
+{:toc}
 
 ## snaker 介绍
 

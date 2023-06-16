@@ -1,12 +1,14 @@
 ---
 layout: post
-title:  "Insight SpringBoot MVC 错误页面跳转原理"
+title:  "SpringBoot MVC 错误页面跳转原理"
 date:   2019-08-16 15:56:37 +0800
-categories: jekyll update
+categories: 源码阅读
+tags: SpringMVC SpringBoot
 ---
-## Insight SpringBoot MVC 错误页面跳转原理
+* content
+{:toc}
 
-## 引子
+## 起因
 
 ​    为什么404的错误页显示 Whitelabel-page ?
 ​    根据浏览器的网络请求分析，肯定是服务内部跳转处理的。

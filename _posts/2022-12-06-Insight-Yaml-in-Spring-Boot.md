@@ -1,14 +1,16 @@
 ---
 layout: post
-title:  "Insight Yaml in Spring Boot"
+title:  "Yaml in Spring Boot"
 date:   2022-12-06 17:33:49 +0800
-categories: jekyll update
+categories: 源码阅读
+tags: SpringBoot Yaml
 ---
-# Insight Yaml in Spring Boot
+* content
+{:toc}
 
-## 遇到的问题
+## 起因
 
-​        在使用 Spring Boot 配置工程时，发现并没有按照预期解析。疑问：**是yaml 的解析规则还是 Spring Boot 解析规则？**
+在使用 Spring Boot 配置工程时，发现并没有按照预期解析。疑问：**是yaml 的解析规则还是 Spring Boot 解析规则？**
 
 ```yaml
 # yaml 配置
