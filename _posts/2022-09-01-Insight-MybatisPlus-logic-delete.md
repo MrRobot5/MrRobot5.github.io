@@ -5,13 +5,14 @@ date:   2022-09-01 10:19:58 +0800
 categories: 源码阅读
 tags: MybatisPlus
 ---
+
 * content
 {:toc}
 
-> 使用MybatisPlus 过程中，发现有逻辑删除的内置功能，比较好奇，引出此次的Code Insight。
-> 
-> 注意：逻辑删除是设置针对全局的。
+使用MybatisPlus 过程中，发现有逻辑删除的内置功能，比较好奇，引出此次的Code Insight。
+注意：逻辑删除是设置针对全局的。
 
+## 使用示例
 ```yaml
 mybatis-plus:
   check-config-location: fals
