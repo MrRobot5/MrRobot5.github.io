@@ -3,7 +3,7 @@ layout: post
 title:  "Spring Inter-bean injection 实现原理"
 date:   2023-04-04 10:50:53 +0800
 categories: 源码阅读
-tags: Spring
+tags: Spring 设计模式 动态代理
 ---
 * content
 {:toc}

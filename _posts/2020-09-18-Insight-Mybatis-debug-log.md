@@ -4,7 +4,7 @@ layout: post
 title:  "Mybatis 日志（动态代理Example）案例分析"
 date:   2020-09-18 18:06:18 +0800
 categories: 源码阅读
-tags: Mybatis
+tags: Mybatis 动态代理
 
 ---
 * content

@@ -3,7 +3,7 @@ layout: post
 title:  "Mybatis 内嵌查询以及 lazyLoader 工作原理"
 date:   2021-12-06 15:46:50 +0800
 categories: 源码阅读
-tags: Mybatis
+tags: Mybatis 动态代理
 ---
 * content
 {:toc}
