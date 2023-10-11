@@ -4,9 +4,11 @@ title:  "h2database 架构分析"
 date:   2022-09-02 18:17:54 +0800
 categories: 学习笔记
 tags: h2数据库 架构设计
+
 ---
+
 * content
-{:toc}
+  {:toc}
 
 > 本文作为 Code Insight 目录，梳理 h2 数据库的知识点以及感兴趣的实现细节。
 > 
@@ -31,12 +33,15 @@ h2 数据库支持嵌入式（开源产品 demo 演示）和服务器模式，�
 3. SQL 语法解析器（递归下降分析器）
 4. 搜索算法（B 树、R-Tree、LSM、全文搜索、多维搜索）
 5. 数据存储结构实现
-6. 快照、checkpoint、MVCC 实现
-7. ANSI-SQL89 规范实现
-8. JDBC 协议实现
-9. TCPServer 实现
-10. Http Web Server 实现
-11. JSP 协议实现
+6. ACID
+7. clustering
+8. 快照、checkpoint、MVCC 实现
+9. ANSI-SQL89 规范实现
+10. SQL Injection
+11. JDBC 协议实现
+12. TCPServer 实现
+13. Http Web Server 实现
+14. JSP 协议实现
 
 ### ③参考信息
 
@@ -88,7 +93,7 @@ h2 数据库支持嵌入式（开源产品 demo 演示）和服务器模式，�
 > 
 > org.h2.index.PageBtreeIndex
 > 
-> RegularTable 采用常用的数据表实现方案，常见的B Tree 索引结构，聚集索引数据存储等。
+> RegularTable 采用常用的数据表实现方案，使用B Tree 索引结构，聚集索引数据存储等。
 > 
 > MVTable 是基于新一代的存储引擎 MVStore 实现的数据表实现。
 
