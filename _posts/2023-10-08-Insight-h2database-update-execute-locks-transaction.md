@@ -11,9 +11,9 @@ tags: h2数据库 设计模式 并发编程 事务控制
 
 > 文章基于 RegularTable 来分析和拆解更新操作。
 > 
-> 锁模型比较简单，方便了解更新的整个流程。并发读写的实现在 MVStore 存储引擎中分析。
+> PageStore 存储引擎默认不开启 MVCC，锁模型比较简单，方便了解更新的整个流程。
 > 
-> 主要关注数据更新的实现、事务的提交和回滚。
+> 主要涉及读写锁（事务隔离），数据更新的实现、事务的提交和回滚。
 > 
 
 ## 相关概念
@@ -24,11 +24,14 @@ tags: h2数据库 设计模式 并发编程 事务控制
 
 ### ①MVCC
 
-> multi version concurrency。在 h2database 实现中，只有 MVStore 存储引擎支持该特性。MVCC 实现原理参考《Insight h2database MVCC 实现原理》。
+> multi version concurrency。在 h2database 实现中，默认 MVStore 存储引擎支持该特性。
+> 
+> 为了简化事务实现模型，只关注非 MVCC 模式。 MVCC 实现原理参考《Insight h2database MVCC 实现原理》。
 
 ```java
 /**
  * Check if multi version concurrency is enabled for this database.
+ * 使用 PageStore 存储引擎时，使用 MVCC=true 开启。
  * @see org.h2.engine.Database#isMultiVersion
  */
 public boolean isMultiVersion() {
@@ -49,11 +52,13 @@ public boolean mvStore = get("MV_STORE", Constants.VERSION_MINOR >= 4);
 
 - **SET LOCK_MODE 命令是数据库级别的，影响全局（affects all connections）。**
 
-- 默认的事务隔离级别为 READ_COMMITTED。但只限在 MVStore 存储引擎中。
+- 默认的事务隔离级别为 READ_COMMITTED。MVStore 存储引擎默认支持。
 
-- **对于 RegularTable 只存在两种级别：READ_UNCOMMITTED， SERIALIZABLE。**
+- **对于 RegularTable 只存在三种级别：READ_UNCOMMITTED， READ_COMMITTED, SERIALIZABLE(默认)。**
 
 - READ_UNCOMMITTED，即无锁定模式（仅用于测试）
+
+- READ_COMMITTED, 避免了脏读，相比于 SERIALIZABLE，并发性能更好，事务的读写操作不阻塞。开启 MVCC 模式即可。
 
 - SERIALIZABLE，不同事务（session）读写互斥。可以防止脏读、不可重复读和幻读，但是效率较低，因为它会锁定所涉及的全部表，直到整个事务完成。
 
@@ -79,7 +84,7 @@ select * from city where id = 5 [50200-184] HYT00/50200
 
 ### ②独占锁实现
 
-> Java 经典的多线程同步示例。同时包含了死锁检测的实现方案。
+> 独占锁是个 Java 经典的多线程同步案例。同时包含了死锁检测的解决方案。
 
 ```java
 /**
@@ -180,7 +185,7 @@ public int update() {
 
 ## 事务控制
 
-> 因为 RegularTable 存储引擎事务是 SERIALIZABLE 级别。就不存在读写并发的情况。事务的提交不做过多分析，主要关注事务回滚的实现。
+> 因为 RegularTable PageStore 存储引擎事务是 SERIALIZABLE 级别， 就不存在读写并发的情况，远没有 MVCC 模式提交事务那么复杂。事务的提交不做过多分析，主要关注事务回滚的实现。
 
 ### ①AutoCommit
 
