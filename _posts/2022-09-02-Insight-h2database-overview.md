@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "h2database 架构分析"
+title:  "h2database 架构总览与模块源码分析大纲"
 date:   2022-09-02 18:17:54 +0800
 categories: 学习笔记
 tags: h2数据库 架构设计
@@ -8,7 +8,7 @@ tags: h2数据库 架构设计
 ---
 
 * content
-  {:toc}
+{:toc}
 
 > 本文作为 Code Insight 目录，梳理 h2 数据库的知识点以及感兴趣的实现细节。
 > 
