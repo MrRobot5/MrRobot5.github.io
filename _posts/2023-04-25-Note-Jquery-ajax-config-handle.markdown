@@ -3,7 +3,7 @@ layout: post
 title:  "Jquery ajax 相关配置和请求处理"
 date:   2023-04-25 11:10:16 +0800
 categories: 学习笔记
-tags: Jquery ajax
+tags: Jquery 网络协议
 ---
 * content
 {:toc}

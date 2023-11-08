@@ -4,7 +4,7 @@ layout: post
 title:  "okhttp Read timed out 重试方案解疑"
 date:   2021-06-11 15:59:56 +0800
 categories: 学习笔记
-tags: okhttp
+tags: okhttp 设计模式
 ---
 * content
 {:toc}

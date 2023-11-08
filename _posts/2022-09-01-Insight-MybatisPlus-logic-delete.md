@@ -3,7 +3,7 @@ layout: post
 title:  "MybatisPlus logic-delete 工作原理"
 date:   2022-09-01 10:19:58 +0800
 categories: 源码阅读
-tags: MybatisPlus
+tags: MybatisPlus Mybatis
 ---
 
 * content

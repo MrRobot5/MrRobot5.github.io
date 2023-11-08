@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "笔记 - 跨域理论以及 SpringMVC 配置实现原理"
+title:  "跨域理论以及 SpringMVC 配置实现原理"
 date:   2023-11-08 14:22:28 +0800
 categories: 学习笔记
-tags: SpringMVC 网络协议
+tags: SpringMVC 网络协议 全栈
 ---
 
 * content
@@ -27,7 +27,7 @@ tags: SpringMVC 网络协议
 
 - 非简单请求（比如：application/json）会触发预检请求，可以从示例代码中验证。
 
-参考文档： [跨源资源共享（CORS） - HTTP | MDN](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS)
+参考文档： [跨源资源共享（CORS）](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS)
 
 
 

@@ -3,7 +3,7 @@ layout: post
 title:  "Communication In Lettuce(netty 编程 Example)"
 date:   2018-04-12 17:11:06 +0800
 categories: 学习笔记
-tags: netty Redis IO
+tags: netty Redis 网络协议
 ---
 * content
 {:toc}
