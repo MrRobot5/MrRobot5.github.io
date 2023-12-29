@@ -17,7 +17,7 @@ tags: h2数据库 并发编程 事务控制
 
 验证 h2database MVCC 机制，需要有并发的环境，不能再使用 `org.h2.tools.Shell` 。可以使用 debug 模式，运行 `org.h2.tools.Console`。使用不同的浏览器模拟多 session
 
-配置图片sss
+<img src="{{ "/images/Snipaste_2023-12-29_19-29-40.png" | prepend: site.baseurl }}" alt="TransactionsEssentials" style="zoom:50%;" />
 
 ### ②并发读写示例
 
