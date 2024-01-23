@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "各路 Mybatis Pagination Interceptor 集成适配探索"
+title:  "混合 Mybatis 分页插件集成适配探索"
 date:   2023-06-28 20:47:55 +0800
 categories: 实战问题
 tags: Mybatis 问题分析
@@ -157,7 +157,7 @@ public class MybatisPlusConfig {
 
 运行结果也是各不相同，一言难尽。
 
-```log
+```sql
 =>  Preparing: SELECT COUNT(*) FROM foo_table
 =>  Preparing: SELECT count(0) FROM foo_table  
 =>  Preparing: select count(1) count FROM foo_table
@@ -171,15 +171,13 @@ public class MybatisPlusConfig {
 
 ```java
 // @see com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration
-public MybatisPlusAutoConfiguration(MybatisPlusProperties properties,
-									ObjectProvider<Interceptor[]> interceptorsProvider,
-									ApplicationContext applicationContext) {
+public MybatisPlusAutoConfiguration(MybatisPlusProperties properties, ObjectProvider<Interceptor[]> interceptorsProvider, ApplicationContext applicationContext) {
 	this.properties = properties;
 	this.interceptors = interceptorsProvider.getIfAvailable();
 	this.applicationContext = applicationContext;
 }
 ```
 
-`ObjectProvider`为编程式注入而设计的接口，提供了便利的对象获取和处理方法。
+`ObjectProvider` 为编程式注入而设计的接口，提供了便利的对象获取和处理方法。
 
 
