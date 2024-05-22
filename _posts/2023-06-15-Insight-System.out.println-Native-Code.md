@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Insight System.out.println() 控制台打印实现"
+title:  "Java 控制台打印实现原理"
 date:   2023-06-15 20:58:03 +0800
 categories: 源码阅读
-tags: native Windows gcc
+tags: JNI
 ---
 * content
 {:toc}
