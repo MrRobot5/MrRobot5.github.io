@@ -3,7 +3,7 @@ layout: post
 title:  "Yaml in Spring Boot"
 date:   2022-12-06 17:33:49 +0800
 categories: 源码阅读
-tags: SpringBoot Yaml
+tags: SpringBoot
 ---
 * content
 {:toc}

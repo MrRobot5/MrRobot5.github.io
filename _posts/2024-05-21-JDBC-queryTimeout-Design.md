@@ -9,7 +9,6 @@ tags: Mysql h2数据库 架构设计
 * content
 {:toc}
 
-# 数据库 queryTimeout 实现机制
 
 > 超时机制是个常见的设计，对于系统的稳定性和可靠性有重要的作用。
 > 
