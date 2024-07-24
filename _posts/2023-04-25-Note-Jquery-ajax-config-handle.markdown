@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Jquery ajax 相关配置和请求处理"
+title:  "JQuery ajax 相关配置和请求处理"
 date:   2023-04-25 11:10:16 +0800
 categories: 学习笔记
-tags: Jquery 网络协议
+tags: JQuery 网络协议
 ---
 * content
 {:toc}
@@ -11,7 +11,7 @@ tags: Jquery 网络协议
 ## 使用示例
 
 ```javascript
-// 使用Jquery 发送 json 数据
+// 使用JQuery 发送 json 数据
 $.ajax({
     url: "some.php",
     type: "POST",
