@@ -46,21 +46,21 @@ System.out.println(blog2.getName());
  * @see BaseExecutor#query(MappedStatement, Object, RowBounds, ResultHandler, CacheKey, BoundSql)
  */
 public <E> List<E> query(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, CacheKey key, BoundSql boundSql) throws SQLException {
-	// By default, flushCacheRequired is false for select statements
-	if (queryStack == 0 && ms.isFlushCacheRequired()) {
-		clearLocalCache();
-	}
-	try {
-		// 相同 SQL (CacheKey 一样)再次查询，直接从缓存中获取结果。
-		list = resultHandler == null ? (List<E>) localCache.getObject(key) : null;
-		if (list != null) {
-			handleLocallyCachedOutputParameters(ms, key, parameter, boundSql);
-		} else {
-			// 发送 SQL 请求到数据库
-			list = queryFromDatabase(ms, parameter, rowBounds, resultHandler, key, boundSql);
-		}
-	}
-	return list;
+    // By default, flushCacheRequired is false for select statements
+    if (queryStack == 0 && ms.isFlushCacheRequired()) {
+        clearLocalCache();
+    }
+    try {
+        // 相同 SQL (CacheKey 一样)再次查询，直接从缓存中获取结果。
+        list = resultHandler == null ? (List<E>) localCache.getObject(key) : null;
+        if (list != null) {
+            handleLocallyCachedOutputParameters(ms, key, parameter, boundSql);
+        } else {
+            // 发送 SQL 请求到数据库
+            list = queryFromDatabase(ms, parameter, rowBounds, resultHandler, key, boundSql);
+        }
+    }
+    return list;
 }
 ```
 
@@ -69,8 +69,6 @@ public <E> List<E> query(MappedStatement ms, Object parameter, RowBounds rowBoun
 - MyBatis 一级缓存（Local Cache）是 MyBatis 默认开启的缓存机制，它是基于 SqlSession 级别的缓存。
 
 - 缓存失效场景：执行 SqlSession 的增删改操作（如 insert, update, delete），会清空一级缓存。
-
-
 
 ## Spring 事务嵌套
 
@@ -123,19 +121,19 @@ public <E> List<E> query(MappedStatement ms, Object parameter, RowBounds rowBoun
  * @see org.apache.commons.dbcp2.PoolableConnection#validate
  */
 public void validate(final String sql, int timeout) throws SQLException {
-	if (sql == null || sql.length() == 0) {
-		// java.sql.Connection.isValid
-		if (!isValid(timeout)) {
-			throw new SQLException("isValid() returned false");
-		}
-		return;
-	}
+    if (sql == null || sql.length() == 0) {
+        // java.sql.Connection.isValid
+        if (!isValid(timeout)) {
+            throw new SQLException("isValid() returned false");
+        }
+        return;
+    }
 
-	if (!sql.equals(lastValidationSql)) {
-		lastValidationSql = sql;
-		// 此处创建了prepareStatement， 并缓存到当前 connection ❌
-		validationPreparedStatement = getInnermostDelegateInternal().prepareStatement(sql);
-	}
+    if (!sql.equals(lastValidationSql)) {
+        lastValidationSql = sql;
+        // 此处创建了prepareStatement， 并缓存到当前 connection ❌
+        validationPreparedStatement = getInnermostDelegateInternal().prepareStatement(sql);
+    }
 }
 ```
 
@@ -145,4 +143,13 @@ Spring 事务开启前、数据库连接池获取 Connection 之前，由于DBCP
 
 
 
+### ③ SQL  设置事务隔离级别
 
+```sql
+SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+
+START TRANSACTION;
+
+-- 事务 B 可以立即读取到事务 A 未提交的数据
+SELECT finance_status FROM tb_some WHERE id = 11091;
+```

@@ -7,7 +7,7 @@ tags: Spring 动态代理 问题分析
 ---
 
 * content
-  {:toc}
+{:toc}
 
 > 使用Spring BeanCopier 拷贝对象过程中，发现了一个Bug。
 > 
