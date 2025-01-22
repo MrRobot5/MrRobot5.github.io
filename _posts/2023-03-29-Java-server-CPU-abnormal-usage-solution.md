@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Java 服务CPU 使用率高排查思路"
+title:  "Java 应用 CPU 使用率高排查思路"
 date:   2023-03-29 18:44:52 +0800
 categories: 学习笔记
-tags: 问题分析
+tags: JVM
 ---
 * content
 {:toc}

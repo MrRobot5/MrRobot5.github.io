@@ -3,7 +3,7 @@ layout: post
 title:  "Mybatis 分页插件 JDK 动态代理案例分析"
 date:   2023-06-29 20:55:57 +0800
 categories: 实战问题
-tags: Mybatis 问题分析 动态代理 设计模式
+tags: Mybatis 动态代理 设计模式
 ---
 
 * content

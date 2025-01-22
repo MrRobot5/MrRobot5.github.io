@@ -3,7 +3,7 @@ layout: post
 title:  "Spring BeanCopier Bug"
 date:   2024-06-04 21:43:31 +0800
 categories: 实战问题
-tags: Spring 动态代理 问题分析
+tags: Spring 动态代理
 ---
 
 * content

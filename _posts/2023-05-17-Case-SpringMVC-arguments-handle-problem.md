@@ -3,7 +3,7 @@ layout: post
 title:  "SpringMVC 不同参数处理机制引发的问题案例分析"
 date:   2023-05-17 18:46:33 +0800
 categories: 实战问题
-tags: SpringMVC 问题分析
+tags: SpringMVC
 ---
 * content
 {:toc}

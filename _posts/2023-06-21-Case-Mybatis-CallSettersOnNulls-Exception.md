@@ -3,7 +3,7 @@ layout: post
 title:  "Mybatis 配置差异引发的问题"
 date:   2023-06-21 15:32:20 +0800
 categories: 实战问题
-tags: Mybatis 问题分析
+tags: Mybatis
 ---
 
 * content

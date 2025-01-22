@@ -3,7 +3,7 @@ layout: post
 title:  "使用数据库连接池场景下的 too many connections 问题排查"
 date:   2023-05-07 17:25:01 +0800
 categories: 实战问题
-tags: DataSource 问题分析
+tags: DataSource
 ---
 * content
 {:toc}
@@ -112,7 +112,6 @@ public Map<String, DataSource> getDataSources(){
 		DataSourceBuilder builder = DataSourceBuilder.create();
 		builder.url(v.getUrl());
 		builder.username(v.getUsername());
-		builder.password(v.getPassword());
 		DataSource dataSource = builder.build();
 		dataSources.put(k, dataSource);
 	});

@@ -3,7 +3,7 @@ layout: post
 title:  "笔记 SpringMVC Controller Advice 和 全局异常处理"
 date:   2019-12-12 16:32:58 +0800
 categories: 学习笔记 实战问题
-tags: SpringMVC 问题分析
+tags: SpringMVC
 ---
 
 * content
