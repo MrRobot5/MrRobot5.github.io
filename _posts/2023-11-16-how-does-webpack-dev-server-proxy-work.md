@@ -3,7 +3,7 @@ layout: post
 title:  "Insight webpack-dev-server proxy 工作原理"
 date:   2023-11-16 16:13:46 +0800
 categories: 源码阅读
-tags: 架构设计 nodeJs
+tags: 架构设计 Node.js
 ---
 
 * content
@@ -14,7 +14,7 @@ tags: 架构设计 nodeJs
 
 在使用 vue 本地开发前后端功能时，发现配置的代理不能正确的请求到后端服务。
 
-通过观察 nodeJs 日志，发现代理 path rewrite 的路径有问题。
+通过观察 Node.js 日志，发现代理 path rewrite 的路径有问题。
 
 借此阅读 webpack-dev-server 源码，了解其工作原理。
 
@@ -48,7 +48,7 @@ module.exports = {
 }
 ```
 
-> /someApiExtend/something 请求被 '/someApi' 优先处理，Rewrite to 的请求解析为：Extend/something。 直接提示 404。❌
+> /someApiExtend/something 请求**被 '/someApi' 优先处理**，Rewrite to 的请求解析为：Extend/something。 直接提示 404。❌
 
 ## webpack-dev-server
 
@@ -165,7 +165,7 @@ app.use(
 
 1. '/' matches any path, all requests will be proxied.
 
-2. '/api' matches paths starting with `/api` ✔ 遇到的疑问，此刻得以解答。
+2. **'/api' matches paths starting with `/api`** ✔ 遇到的疑问，此刻得以解答。
 
 [Context matching 文档](https://www.npmjs.com/package/http-proxy-middleware?activeTab=readme#context-matching)
 
