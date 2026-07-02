@@ -4,6 +4,7 @@ title:  "Insight h2database SQL like 查询"
 date:   2023-10-07 13:57:11 +0800
 categories: 源码阅读
 tags: h2数据库 设计模式
+mermaid: true
 ---
 
 * content
@@ -67,6 +68,25 @@ public Value getValue(Session session) {
 **核心方法**： org.h2.expression.CompareLike#optimize
 
 在查询准备阶段（org.h2.command.dml.Select#prepare），如果检测到如下的情况，会进行查询语句重写。
+
+```mermaid
+graph TD
+    A[SQL: NAME LIKE 'bj%i'] --> B{prepare 阶段优化}
+    B -->|模式为 '%'| C[重写为 IS NOT NULL]
+    B -->|无通配符| D[重写为 EQUAL 等值匹配]
+    B -->|前缀匹配 'bj%'| E[createIndexConditions]
+    E --> F[提取前缀字符串 'bj']
+    F --> G[增加索引条件 NAME >= 'bj']
+    F --> H[计算终止字符 'bk']
+    H --> I[增加索引条件 NAME < 'bk']
+    I --> J[范围查询<br/>替代全表扫描]
+    C --> K[执行优化后的条件]
+    D --> K
+    J --> K
+
+    style E fill:#e1f5fe,stroke:#01579b
+    style J fill:#e8f5e9,stroke:#2e7d32
+```
 
 ```java
 if ("%".equals(p)) {

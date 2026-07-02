@@ -4,6 +4,7 @@ title:  "类加载机制引起 Spring 属性解析异常分析"
 date:   2025-01-21 22:49:20 +0800
 categories: 源码阅读
 tags: Spring
+mermaid: true
 ---
 
 * content
@@ -72,6 +73,28 @@ public static void main(String[] args) {
 👉通过分析 classpath 相关jar,  发现依赖的 jar 包含 rebel.xml 文件。JRebel会根据`rebel.xml`配置文件中的 classpath 配置扫描指定的目录和 JAR 文件。
 
 这样，查找文件不是当前工程目录(/workspace/another.foo.com/target/classes)，肯定找不到配置文件。
+
+JRebel 类加载器与 Spring 属性解析的冲突流程如下：
+
+```mermaid
+graph TD
+    A[Spring 启动] --> B[解析 context:property-placeholder]
+    B --> C[PathMatchingResourcePatternResolver<br/>查找 classpath:*.properties]
+    C --> D{ClassLoader 类型}
+    D -->|正常 AppClassLoader| E[扫描当前工程 target/classes]
+    D -->|JRebel 类加载器| F[扫描 rebel.xml 配置的目录]
+    F --> G[路径指向 /workspace/another.foo.com<br/>❌ 非当前工程]
+    G --> H[找不到 *.properties 文件]
+    H --> I[PropertySourcesPlaceholderConfigurer<br/>locations 为空]
+    I --> J[占位符解析失败<br/>Could not resolve placeholder]
+    E --> K[正常加载属性文件]
+
+    style D fill:#e1f5fe,stroke:#01579b
+    style F fill:#fff3e0,stroke:#e65100
+    style G fill:#ffebee,stroke:#c62828
+    style J fill:#ffebee,stroke:#c62828
+    style K fill:#e8f5e9,stroke:#2e7d32
+```
 
 <img src="{{ "/images/find-the-jrebel.png" | prepend: site.baseurl }}" alt="TransactionsEssentials" style="zoom:50%;" />
 

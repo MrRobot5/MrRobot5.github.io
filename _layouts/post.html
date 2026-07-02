@@ -98,3 +98,31 @@ layout: default
 }());
 </script>
 <script src="{{ "/js/pageContent.js " | prepend: site.baseurl }}" charset="utf-8"></script>
+{% if page.mermaid %}
+<script>
+(function() {
+    mermaid.initialize({ startOnLoad: false });
+
+    function renderMermaid() {
+        var blocks = document.querySelectorAll('pre code.language-mermaid');
+        if (!blocks.length) return;
+
+        blocks.forEach(function(block) {
+            var pre = block.parentNode;
+            var div = document.createElement('div');
+            div.className = 'mermaid';
+            div.textContent = block.textContent;
+            pre.parentNode.replaceChild(div, pre);
+        });
+
+        mermaid.run({ querySelector: '.mermaid' });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', renderMermaid);
+    } else {
+        renderMermaid();
+    }
+})();
+</script>
+{% endif %}

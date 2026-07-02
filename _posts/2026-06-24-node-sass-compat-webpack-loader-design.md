@@ -4,6 +4,7 @@ title: "node-sass 兼容问题与 webpack loader 的巧妙设计"
 date: 2026-06-24 18:11:00 +0800
 categories: 实战问题
 tags: Webpack Node.js
+mermaid: true
 ---
 
 * content
@@ -217,6 +218,22 @@ const result = A(B(C(source)));
 
 - **源码预处理**（如替换、转译）放在右侧，先执行；
 - **后处理**（如样式注入、资源打包）放在左侧，最后执行。
+
+本案例中的 loader 执行顺序如下：
+
+```mermaid
+graph LR
+    A[原始源码] --> B[string-replace-loader]
+    B --> C[sass-loader]
+    C --> D[css-loader]
+    D --> E[vue-style-loader]
+    E --> F[最终输出]
+
+    style B fill:#e1f5fe,stroke:#01579b
+    style C fill:#e1f5fe,stroke:#01579b
+    style D fill:#e1f5fe,stroke:#01579b
+    style E fill:#e1f5fe,stroke:#01579b
+```
 
 ### ② 单一职责与管道模式
 

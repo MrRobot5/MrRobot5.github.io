@@ -5,6 +5,7 @@ title:  "Spring UCC 组件实现思路和改进思考"
 date:   2020-08-20 11:12:22 +0800
 categories: 源码阅读
 tags: Spring
+mermaid: true
 
 ---
 * content
@@ -65,6 +66,22 @@ public class ConfigFoo {
 #### 源码实现分析
 
 配置不能实时生效，问题排查有两个方向：**ZK 的通知机制**，**通知数据同步到ConfigFoo 的机制**。
+
+UCC 配置同步的整体流程如下：
+
+```mermaid
+graph LR
+    A[UCC管理端<br/>修改配置] --> B[ZooKeeper<br/>数据变更]
+    B --> C[ZK Client<br/>watch通知]
+    C --> D[PropertyConfigProcessor<br/>process]
+    D --> E{FieldChangeUtils<br/>类型支持?}
+    E -->|支持<br/>String/Integer/Boolean| F[反射赋值<br/>ConfigFoo]
+    E -->|不支持<br/>如 double| G[静默忽略<br/>❌ 配置不生效]
+
+    style E fill:#e1f5fe,stroke:#01579b
+    style F fill:#e8f5e9,stroke:#2e7d32
+    style G fill:#ffebee,stroke:#c62828
+```
 
 ```java
 /**

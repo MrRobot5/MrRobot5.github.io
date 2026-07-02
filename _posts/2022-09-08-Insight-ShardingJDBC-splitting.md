@@ -4,6 +4,7 @@ title:  "ShardingJDBC 读写分离路由机制实现原理"
 date:   2022-09-08 18:11:28 +0800
 categories: 源码阅读
 tags: ShardingJDBC
+mermaid: true
 ---
 * content
 {:toc}
@@ -73,6 +74,21 @@ spring
   
 
 ## Code Insight
+
+MasterSlaveRouter 的核心路由逻辑如下：
+
+```mermaid
+graph TD
+    A[SQL请求] --> B{SQL类型判断}
+    B -->|DQL 查询| C{isMasterRoute?}
+    B -->|DML/DDL 写入| D[主库]
+    C -->|Master已访问| D
+    C -->|Hint强制主库| D
+    C -->|普通查询| E[从库 负载均衡算法]
+
+    style D fill:#fff3e0,stroke:#e65100
+    style E fill:#e8f5e9,stroke:#2e7d32
+```
 
 ```java
 public final class MasterSlaveRouter {

@@ -4,6 +4,7 @@ title:  "Insight webpack-dev-server proxy 工作原理"
 date:   2023-11-16 16:13:46 +0800
 categories: 源码阅读
 tags: 架构设计 Node.js
+mermaid: true
 ---
 
 * content
@@ -131,6 +132,20 @@ module.exports = {
 ```
 
 ### ③ devServer.proxy 解析流程
+
+```mermaid
+graph TD
+    A[前端请求 /someApi/user] --> B{devServer proxy<br/>配置匹配}
+    B -->|匹配 /someApi| C[pathRewrite<br/>去掉 /someApi]
+    B -->|匹配 /someApiExtend| D[pathRewrite<br/>去掉 /someApiExtend]
+    B -->|无匹配| E[静态资源服务]
+    C --> F[转发到 target]
+    D --> G[转发到 target]
+
+    style B fill:#e1f5fe,stroke:#01579b
+    style C fill:#fff3e0,stroke:#e65100
+    style D fill:#fff3e0,stroke:#e65100
+```
 
 1. 首先，判断是否启用 proxy， 并引入 `http-proxy-middleware` 组件
 

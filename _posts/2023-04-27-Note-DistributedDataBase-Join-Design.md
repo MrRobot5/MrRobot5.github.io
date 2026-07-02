@@ -4,6 +4,7 @@ title:  "分布式数据库 Join 查询方案"
 date:   2023-04-27 20:49:40 +0800
 categories: 学习笔记
 tags: Elasticsearch Mysql 
+mermaid: true
 ---
 * content
 {:toc}
@@ -22,7 +23,23 @@ tags: Elasticsearch Mysql
 
 - sharding-jdbc 代理了原始的 datasource, 实现 jdbc 规范来完成分库分表的分发和组装，应用层无感知。
 
-- 执行流程：SQL解析 => 执行器优化 => **SQL路由** => SQL改写 => SQL执行 => **结果归并** `io.shardingsphere.core.executor.ExecutorEngine#execute`
+- 执行流程如下：
+
+```mermaid
+graph LR
+    A[原始SQL] --> B[SQL解析]
+    B --> C[执行器优化]
+    C --> D[SQL路由]
+    D --> E[SQL改写]
+    E --> F[SQL执行]
+    F --> G[结果归并]
+
+    style B fill:#e1f5fe,stroke:#01579b
+    style D fill:#fff3e0,stroke:#e65100
+    style G fill:#e8f5e9,stroke:#2e7d32
+```
+
+`io.shardingsphere.core.executor.ExecutorEngine#execute`
 
 - Join 语句的解析，决定了要分发 SQL 到哪些实例节点上。对应SQL路由。
 

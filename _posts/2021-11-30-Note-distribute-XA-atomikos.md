@@ -4,6 +4,7 @@ title:  "分布式事务- XA 模式与 atomikos 框架浅析"
 date:   2021-11-30 17:58:34 +0800
 categories: 学习笔记
 tags: Spring 事务控制
+mermaid: true
 ---
 * content
 {:toc}
@@ -17,6 +18,31 @@ tags: Spring 事务控制
 > 行业内比较实用的方案：事务消息+最终一致性。
 
 ## 分布式事务-XA模式
+
+XA 两阶段提交流程如下：
+
+```mermaid
+sequenceDiagram
+    participant TM as 事务协调者 TM
+    participant RM1 as 资源管理器 RM1
+    participant RM2 as 资源管理器 RM2
+
+    Note over TM,RM2: 第一阶段 Prepare
+    TM->>RM1: xa_prepare
+    RM1-->>TM: yes
+    TM->>RM2: xa_prepare
+    RM2-->>TM: yes
+
+    alt 全部回复 yes
+        Note over TM,RM2: 第二阶段 Commit
+        TM->>RM1: xa_commit
+        TM->>RM2: xa_commit
+    else 存在 no
+        Note over TM,RM2: 第二阶段 Rollback
+        TM->>RM1: xa_rollback
+        TM->>RM2: xa_rollback
+    end
+```
 
 - XA 协议是由 X/Open 组织提出的分布式事务处理规范，主要定义了事务管理器 TM 和局部资源管理器 RM 之间的接口。
 
