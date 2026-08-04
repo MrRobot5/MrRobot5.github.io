@@ -183,3 +183,5 @@ graph LR
 - MVStore 栈实现：`MVTable→(TransactionStore)→MVStore→mvstore.FileStore`
 - `MVMap` 是 `MVStore` 独有的中间层，理解这点就能区分两套引擎的核心设计差异
 - `FileStore` 同名不同类，各自只服务本栈，是最底层的文件读写封装
+
+{% include mvtable-update-dataflow.html %}
