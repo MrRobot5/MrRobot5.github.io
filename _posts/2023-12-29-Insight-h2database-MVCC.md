@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Insight h2database MVCC 实现原理"
+title:  "Insight h2database Regular Table 传统存储引擎 MVCC 实现原理"
 date:   2023-12-29 19:02:54 +0800
 categories: 源码阅读
 tags: h2数据库 并发编程 事务控制
@@ -9,7 +9,7 @@ tags: h2数据库 并发编程 事务控制
 * content
 {:toc}
 
-> 基于《Insight h2database 更新、读写锁以及事务原理》对于更新流程有了深入了解。在独占锁的简单模型上，分析 h2database 基于乐观锁（并发控制机制）的行锁锁定机制。
+> 基于《Insight h2database 更新、读写锁以及事务原理》对于更新流程有了深入了解。本文聚焦 h2database **Regular Table 传统存储引擎** 的 MVCC 实现，在独占锁的简单模型上，分析其基于乐观锁（并发控制机制）的行锁锁定机制。
 
 ## MVCC 使用示例
 
@@ -193,11 +193,11 @@ public boolean next() {
 
 
 
-## one more thing, MultiVersionIndex
+## MultiVersionIndex 多版本索引
 
 > 为了简化模型，方便主流程分析，上述过程只是分析了主索引（PageDataIndex）在MVCC 模式下的并发操作。对于其他的BTree 索引，其实也是经过了类似的处理。
 
-数据其实是通过 MultiVersionIndex实现的。
+数据其实是通过 MultiVersionIndex 实现的。
 
 - org.h2.index.MultiVersionIndex 代理和封装了 PageBtreeIndex。它由一个常规索引（PageBtreeIndex）和一个内存中的树索引组合而成。
 
@@ -217,5 +217,13 @@ public Cursor find(Session session, SearchRow first, SearchRow last) {
     }
 }
 ```
+
+## 总结
+
+- h2database 的 Regular Table 传统存储引擎在 MVCC 模式下采用乐观锁机制，通过 `row.sessionId` 和 `row.deleted` 实现多版本并发控制。
+- 更新操作采用先删后增的组合方式，未提交数据通过 `delta` 集合暂存，保证事务隔离。
+- `PageDataCursor` 在读取时根据 `sessionId` 和 `deleted` 标记过滤数据，实现读写互不阻塞。
+- 除主索引外，二级索引通过 `MultiVersionIndex` 代理封装，同样支持多版本数据融合查询。
+
 
 
