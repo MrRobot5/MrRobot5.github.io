@@ -11,13 +11,13 @@ mermaid: true
 * content
 {:toc}
 
-> 在深入阅读 H2 数据库源码时，会发现它内部存在**两套完全独立的存储实现**——`MVStore` 和 `PageStore`。
+> 在深入阅读 H2 数据库源码时，会发现内部存在**两套完全独立的存储实现**——`MVStore` 和 `PageStore`。
 >
 > 初次接触时容易混淆：同名类 `FileStore` 为何分布在不同包下？`MVMap` 和 `Page` 又是什么关系？
 >
 > 本文通过**层级对照**的方式，将两条并行的存储栈拉平对比，帮助建立起清晰的结构认知。`MVStore` 为默认引擎，采用 `MVCC` 机制；`Regular` 对应传统的 `PageStore` 栈。
 
-## 背景：为什么有两套存储栈
+## 背景
 
 `Database` 在启动时根据配置决定走哪条存储栈，`MVStore` 为当前默认选项：
 
@@ -58,9 +58,9 @@ graph TB
     end
 ```
 
-> ⚠️ **关键点**：`org.h2.mvstore.FileStore` 和 `org.h2.store.FileStore` 是**两个不同的类**（同名），分属两套栈，互不相关。
+> ⚠️ **关键点**：`org.h2.mvstore.FileStore` 和 `org.h2.store.FileStore` 是**两个不同的类**，分属两套栈，互不相关。
 
-## 关系解读：从内到外
+## 存储实现
 
 ### ① MVStore 栈
 
@@ -116,7 +116,7 @@ public class Database {
 - `PageStore.file` → `PageStore` **持有一个** `store.FileStore`
 - `Database.pageStore` → 整库**共享一个** `PageStore` 实例
 
-## 层级对应关系：两栈平行对照
+## 平行对应关系
 
 ```mermaid
 graph LR
@@ -170,12 +170,14 @@ graph LR
 | 维度 | MVStore 栈 | PageStore 栈 |
 |------|-----------|-------------|
 | 默认启用 | ✔ 默认 | ❌ 需显式配置 |
-| 事务支持 | `MVCC` 多版本并发 | 传统锁机制 |
+| 事务支持 | `MVCC` 多版本并发 | 默认传统锁机制（也可开启 MVCC） |
 | 中间层 | `MVMap`（多 `K-V` 树容器） | 无，直接用固定页 `B-Tree` |
 | 文件 I/O | `mvstore.FileStore` | `store.FileStore` |
 | 表实现 | `MVTable` | `RegularTable` |
 
 🎈 **最关键的区别**：`MVMap` 是 `MVStore` 独有的中间层。`MVStore` 是“多个 `MVMap` 的容器”，每张 `MVTable` 的数据/索引就是若干 `MVMap`；`PageStore` 侧没有这层，直接用固定页 `B-Tree` 索引。
+
+🎈 RegularTable 有完整的 MVCC 事务语义，包括读己之写、隐藏其他事务未提交数据、写写冲突检测、提交与回滚；只是底层仍**受 PageStore 全局同步**与内存 undoLog 的限制，不如 MVTable 的 MVStore 原生 MVCC。
 
 ## 总结
 
@@ -183,5 +185,3 @@ graph LR
 - MVStore 栈实现：`MVTable→(TransactionStore)→MVStore→mvstore.FileStore`
 - `MVMap` 是 `MVStore` 独有的中间层，理解这点就能区分两套引擎的核心设计差异
 - `FileStore` 同名不同类，各自只服务本栈，是最底层的文件读写封装
-
-{% include mvtable-update-dataflow.html %}

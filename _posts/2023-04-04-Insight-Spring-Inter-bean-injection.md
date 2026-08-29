@@ -48,7 +48,7 @@ public class AppConfig {
 
 4. @Configuration 类里的方法不能为private 或者 final，CGLIB 生成的继承类的规则限制。**防止出现不生效的情况，Spring 会强制校验**。
    
-   ```log
+   ```text
    Configuration problem: @Bean method 'beanTwo' must not be private or final; change the method's modifiers to continue
    ```
 

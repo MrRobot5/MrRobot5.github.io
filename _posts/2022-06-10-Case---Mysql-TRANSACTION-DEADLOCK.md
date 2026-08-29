@@ -32,7 +32,7 @@ SHOW ENGINE innodb STATUS
 
 ### 日志
 
-```log
+```text
 ------------------------
 LATEST DETECTED DEADLOCK
 ------------------------

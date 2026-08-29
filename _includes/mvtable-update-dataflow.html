@@ -1,0 +1,240 @@
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>H2 MVTable UPDATE 数据变化全过程</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  .wrap { max-width: 1100px; margin: 0 auto; }
+  .sub { color: #8b949e; font-size: 14px; margin-bottom: 20px; }
+  .sql {
+    background: #161b22; border: 1px solid #30363d; border-radius: 8px;
+    padding: 12px 16px; font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 14px; color: #79c0ff; margin-bottom: 20px;
+  }
+  .controls { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+  button {
+    background: #21262d; color: #c9d1d9; border: 1px solid #30363d;
+    border-radius: 6px; padding: 8px 16px; font-size: 14px; cursor: pointer;
+    transition: .15s;
+  }
+  button:hover:not(:disabled) { background: #30363d; border-color: #58a6ff; }
+  button:disabled { opacity: .4; cursor: not-allowed; }
+  button.primary { background: #238636; border-color: #2ea043; }
+  button.primary:hover:not(:disabled) { background: #2ea043; }
+  button.danger { background: #6e2222; border-color: #8b3232; }
+  button.danger:hover:not(:disabled) { background: #8b3232; }
+  .stage-label {
+    margin: 14px 0 18px; font-size: 15px; color: #d29922;
+    background: #1c1a12; border-left: 3px solid #d29922; padding: 8px 14px;
+    border-radius: 0 6px 6px 0;
+  }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 800px) { .grid { grid-template-columns: 1fr; } }
+  .panel {
+    background: #161b22; border: 1px solid #30363d; border-radius: 10px;
+    padding: 16px; min-height: 220px;
+  }
+  .panel h2 {
+    font-size: 15px; color: #58a6ff; margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .panel h2 .tag {
+    font-size: 11px; background: #30363d; color: #8b949e;
+    padding: 2px 8px; border-radius: 10px; font-weight: normal;
+  }
+  .kv {
+    font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 13px;
+    border: 1px solid #30363d; border-radius: 8px; padding: 12px;
+    margin-bottom: 10px; background: #0d1117; transition: .3s;
+  }
+  .kv.flash { border-color: #d29922; box-shadow: 0 0 0 2px rgba(210,153,34,.25); }
+  .kv .row { display: flex; justify-content: space-between; padding: 2px 0; }
+  .kv .k { color: #8b949e; }
+  .committed { border-color: #2ea043 !important; }
+  .committed .badge { color: #3fb950; }
+  .uncommitted .badge { color: #d29922; }
+  .deleted .badge { color: #f85149; }
+  .badge { font-size: 11px; padding: 1px 8px; border-radius: 10px; border: 1px solid currentColor; }
+  .value-bjn { color: #a5d6ff; }
+  .value-bjz { color: #ffab70; }
+  .value-null { color: #f85149; }
+  .empty { color: #6e7681; font-style: italic; padding: 20px; text-align: center; }
+  .chain {
+    margin-top: 14px; font-family: monospace; font-size: 12px; color: #8b949e;
+  }
+  .chain .arrow { color: #d29922; margin: 0 6px; }
+  .note {
+    font-size: 12px; color: #6e7681; margin-top: 10px; line-height: 1.5;
+  }
+  .opid { color: #d2a8ff; }
+  .steps { display: flex; gap: 4px; margin-bottom: 16px; flex-wrap: wrap; }
+  .step-dot {
+    flex: 1; min-width: 90px; text-align: center; font-size: 11px;
+    padding: 6px 4px; border-radius: 6px; background: #161b22;
+    border: 1px solid #30363d; color: #6e7681;
+  }
+  .step-dot.active { background: #1f6feb33; border-color: #58a6ff; color: #58a6ff; }
+  .step-dot.done { color: #3fb950; border-color: #238636; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>H2 MVTable — UPDATE 数据变化全过程</h1>
+  <div class="sub">跟踪 <code>undoLog</code> 与数据 MVMap 中 VersionedValue 的实时变化 · 事务 tx5</div>
+  <div class="sql">SET AUTOCOMMIT OFF;<br>update city set code = 'bjz' where id = 2;&nbsp;&nbsp;-- 'bjn' → 'bjz'</div>
+
+  <div class="steps" id="steps"></div>
+
+  <div class="controls">
+    <button id="btnPrev">‹ 上一步</button>
+    <button id="btnNext" class="primary">下一步 ›</button>
+    <button id="btnReset">↺ 重置</button>
+    <span style="flex:1"></span>
+    <button id="btnCommit" class="primary">模拟 COMMIT</button>
+    <button id="btnRollback" class="danger">模拟 ROLLBACK</button>
+  </div>
+
+  <div class="stage-label" id="stageLabel"></div>
+
+  <div class="grid">
+    <div class="panel">
+      <h2>data MVMap <span class="tag">key = 2 (主键 id)</span></h2>
+      <div id="dataPanel"></div>
+      <div class="chain" id="chainView"></div>
+    </div>
+    <div class="panel">
+      <h2>undoLog <span class="tag">[mapId, key, oldValue]</span></h2>
+      <div id="undoPanel"></div>
+      <div class="note" id="undoNote"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const OP0 = "5497558138880"; // tx5, logId=0
+const OP1 = "5497558138881"; // tx5, logId=1
+
+// 每个阶段的完整状态快照
+const stages = [
+  {
+    name: "阶段 0 · 事务前",
+    desc: "数据 MVMap 中 key=2 是一行已提交数据,operationId=0 对所有事务可见;undoLog 为空。",
+    data: { value: "(2,'bjn',北京市)", op: "0", state: "committed" },
+    undo: []
+  },
+  {
+    name: "阶段 1 · logId=0 · 删除旧行",
+    desc: "trySet 先把当前已提交值(bjn)写入 undoLog(write-ahead),再把 data 置为删除标记 value=null,operationId=" + OP0 + "。",
+    data: { value: "null (删除标记)", op: OP0, state: "deleted", flash: true },
+    undo: [
+      { key: OP0, mapId: 8, k: 2, oldValue: "(2,'bjn',北京市)", oldOp: "0", flash: true }
+    ]
+  },
+  {
+    name: "阶段 2 · logId=1 · 插入新行(题图时刻)",
+    desc: "trySet 把阶段1的删除标记写入第2条 undo,再写入新行 bjz,operationId=" + OP1 + "。此时 undoLog.size=2,即调试器题图。",
+    data: { value: "(2,'bjz',北京市)", op: OP1, state: "uncommitted", flash: true },
+    undo: [
+      { key: OP0, mapId: 8, k: 2, oldValue: "(2,'bjn',北京市)", oldOp: "0" },
+      { key: OP1, mapId: 8, k: 2, oldValue: "null (删除标记)", oldOp: OP0, flash: true }
+    ]
+  }
+];
+
+const commitStage = {
+  name: "终态 · COMMIT",
+  desc: "遍历本事务 undo,把 data 里对应值的 operationId 清零(转为已提交),并清空 undoLog。bjz 成为新的已提交版本。",
+  data: { value: "(2,'bjz',北京市)", op: "0", state: "committed", flash: true },
+  undo: []
+};
+const rollbackStage = {
+  name: "终态 · ROLLBACK",
+  desc: "从大 logId 到小 logId 倒序遍历 undo,用 oldValue 逐级还原:先还原为删除标记,再还原为 bjn。最终如同 UPDATE 从未发生。",
+  data: { value: "(2,'bjn',北京市)", op: "0", state: "committed", flash: true },
+  undo: []
+};
+
+let idx = 0;
+let terminal = null; // 'commit' | 'rollback' | null
+
+function valClass(v) {
+  if (v.indexOf('null') === 0) return 'value-null';
+  if (v.indexOf('bjz') >= 0) return 'value-bjz';
+  return 'value-bjn';
+}
+function stateBadge(s) {
+  if (s === 'committed') return '已提交';
+  if (s === 'deleted') return '删除标记';
+  return '未提交 tx5';
+}
+
+function render() {
+  const st = terminal === 'commit' ? commitStage
+           : terminal === 'rollback' ? rollbackStage
+           : stages[idx];
+
+  // steps
+  const stepEl = document.getElementById('steps');
+  stepEl.innerHTML = stages.map((s, i) => {
+    let cls = 'step-dot';
+    if (!terminal) { if (i < idx) cls += ' done'; if (i === idx) cls += ' active'; }
+    else cls += ' done';
+    return `<div class="${cls}">${s.name.split('·')[0].trim()}</div>`;
+  }).join('') + `<div class="step-dot ${terminal?'active':''}">终态</div>`;
+
+  document.getElementById('stageLabel').textContent = st.name + ' — ' + st.desc;
+
+  // data panel
+  const d = st.data;
+  document.getElementById('dataPanel').innerHTML =
+    `<div class="kv ${d.state} ${d.flash?'flash':''}">
+      <div class="row"><span class="k">value</span><span class="${valClass(d.value)}">${d.value}</span></div>
+      <div class="row"><span class="k">operationId</span><span class="opid">${d.op}</span></div>
+      <div class="row"><span class="k">状态</span><span class="badge">${stateBadge(d.state)}</span></div>
+    </div>`;
+
+  // chain view
+  const chainEl = document.getElementById('chainView');
+  if (st.undo.length === 2) {
+    chainEl.innerHTML = '回溯链:<br>bjz(op=…881)<span class="arrow">→</span>null(op=…880)<span class="arrow">→</span>bjn(op=0,链尾可见)';
+  } else if (st.undo.length === 1) {
+    chainEl.innerHTML = '回溯链:<br>null(op=…880)<span class="arrow">→</span>bjn(op=0,链尾可见)';
+  } else {
+    chainEl.innerHTML = '';
+  }
+
+  // undo panel
+  const up = document.getElementById('undoPanel');
+  if (st.undo.length === 0) {
+    up.innerHTML = '<div class="empty">undoLog 为空 (size = 0)</div>';
+  } else {
+    up.innerHTML = st.undo.map(u =>
+      `<div class="kv ${u.flash?'flash':''}">
+        <div class="row"><span class="k">key (opId)</span><span class="opid">${u.key}</span></div>
+        <div class="row"><span class="k">[0] mapId</span><span>${u.mapId}</span></div>
+        <div class="row"><span class="k">[1] key</span><span>${u.k}</span></div>
+        <div class="row"><span class="k">[2] oldValue</span><span class="${valClass(u.oldValue)}">${u.oldValue}</span></div>
+        <div class="row"><span class="k">oldValue.op</span><span class="opid">${u.oldOp}</span></div>
+      </div>`).join('');
+  }
+  document.getElementById('undoNote').textContent =
+    st.undo.length ? 'size = ' + st.undo.length + ' · 每条 oldValue 恰好是前一步 data 的值,串成回溯链' : '';
+
+  // buttons
+  document.getElementById('btnPrev').disabled = terminal || idx === 0;
+  document.getElementById('btnNext').disabled = terminal || idx === stages.length - 1;
+  document.getElementById('btnCommit').disabled = terminal === 'commit';
+  document.getElementById('btnRollback').disabled = terminal === 'rollback';
+}
+
+document.getElementById('btnNext').onclick = () => { if (idx < stages.length-1) idx++; render(); };
+document.getElementById('btnPrev').onclick = () => { if (idx > 0) idx--; render(); };
+document.getElementById('btnReset').onclick = () => { idx = 0; terminal = null; render(); };
+document.getElementById('btnCommit').onclick = () => { idx = stages.length-1; terminal = 'commit'; render(); };
+document.getElementById('btnRollback').onclick = () => { idx = stages.length-1; terminal = 'rollback'; render(); };
+
+render();
+</script>
+</body>
+</html>

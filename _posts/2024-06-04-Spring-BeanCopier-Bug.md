@@ -48,7 +48,7 @@ copier.copy(source, target, null);
 
 ### ③日常日志
 
-```log
+```text
 Exception in thread "main" java.lang.NullPointerException
         at org.springframework.cglib.core.ReflectUtils.getMethodInfo(ReflectUtils.java:424)
         at org.springframework.cglib.beans.BeanCopier$Generator.generateClass(BeanCopier.java:133)

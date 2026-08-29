@@ -12,7 +12,7 @@ tags: Mysql
 
 ## 使用 Mysql driver 遇到的问题
 
-```log
+```text
 java.sql.SQLException: Value '0000-00-00 00:00:00' can not be represented as java.sql.Timestamp
     at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:861)
     at com.mysql.jdbc.ResultSetRow.getTimestampFast(ResultSetRow.java:947)

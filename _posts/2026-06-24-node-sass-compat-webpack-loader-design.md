@@ -47,7 +47,7 @@ mermaid: true
 
 在新的 MacBook Pro (M1 Pro, arm64) 上执行 `npm install` 时，`node-sass` 安装阶段直接报错：
 
-```log
+```text
 Error: Node Sass does not yet support your current environment: OS X Unsupported architecture (arm64)
 ```
 
@@ -59,7 +59,7 @@ Error: Node Sass does not yet support your current environment: OS X Unsupported
 
 node-sass 是一个 Node.js 到 libsass 的绑定库，libsass 使用 C++ 编写。发布时，node-sass 会针对特定平台（OS + 架构 + Node 版本）提供预编译的 `.node` 二进制文件。
 
-```log
+```text
 Downloading binary from https://github.com/sass/node-sass/releases/download/v6.0.1/
 darwin-arm64-83_binding.node
 Cannot download "https://github.com/sass/node-sass/releases/download/v6.0.1/darwin-arm64-83_binding.node"
@@ -78,7 +78,7 @@ npm install sass --save-dev
 
 然而项目启动后，编译阶段报错：
 
-```log
+```text
 SassError: expected selector.
 /deep/ .some-class
 ^
